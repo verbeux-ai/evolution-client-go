@@ -1,0 +1,3 @@
+package listener_test
+
+const messageExample1 = `{"event":"messages.upsert","instance":"Ivo Teste","data":{"key":{"remoteJid":"558598437440@s.whatsapp.net","fromMe":true,"id":"3EB0742228A7FA7CB97E44"},"pushName":"Ivo","status":"SERVER_ACK","message":{"conversation":"fala doto"},"messageType":"conversation","messageTimestamp":1731071861,"instanceId":"abf7de57-cedb-4204-a9fd-8335717380a7","source":"web"},"destination":"https://webhook.site/75a58d38-80c5-4f9c-b164-7d76ac427377","date_time":"2024-11-08T13:17:41.471Z","sender":"558594138387@s.whatsapp.net","server_url":"http://localhost:8080","apikey":"xxxxxx"}`
