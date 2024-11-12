@@ -10,26 +10,26 @@ import (
 )
 
 type TextMessageRequest struct {
-	Number           string               `json:"number"`
-	Text             string               `json:"text"`
-	Delay            int                  `json:"delay"`
-	Quoted           MessageRequestQuoted `json:"quoted"`
-	LinkPreview      bool                 `json:"linkPreview"`
-	MentionsEveryOne bool                 `json:"mentionsEveryOne"`
-	Mentioned        []string             `json:"mentioned"`
+	Number           string               `json:"number,omitempty"`
+	Text             string               `json:"text,omitempty"`
+	Delay            int                  `json:"delay,omitempty"`
+	Quoted           MessageRequestQuoted `json:"quoted,omitempty"`
+	LinkPreview      bool                 `json:"linkPreview,omitempty"`
+	MentionsEveryOne bool                 `json:"mentionsEveryOne,omitempty"`
+	Mentioned        []string             `json:"mentioned,omitempty"`
 }
 
 type MessageRequestQuoted struct {
-	Key     QuotedKey     `json:"key"`
-	Message QuotedMessage `json:"message"`
+	Key     QuotedKey     `json:"key,omitempty"`
+	Message QuotedMessage `json:"message,omitempty"`
 }
 
 type QuotedKey struct {
-	Id string `json:"id"`
+	Id string `json:"id,omitempty"`
 }
 
 type QuotedMessage struct {
-	Conversation string `json:"conversation"`
+	Conversation string `json:"conversation,omitempty"`
 }
 
 type TextMessageResponse struct {
@@ -45,23 +45,23 @@ type TextMessageResponse struct {
 }
 
 type TextMessageResponseKey struct {
-	RemoteJid string `json:"remoteJid"`
-	FromMe    bool   `json:"fromMe"`
-	Id        string `json:"id"`
+	RemoteJid string `json:"remoteJid,omitempty"`
+	FromMe    bool   `json:"fromMe,omitempty"`
+	Id        string `json:"id,omitempty"`
 }
 
 type TextMessageResponseMessage struct {
-	Conversation string `json:"conversation"`
+	Conversation string `json:"conversation,omitempty"`
 }
 
 type TextMessageResponseContextInfo struct {
-	Participant   string                   `json:"participant"`
-	StanzaId      string                   `json:"stanzaId"`
-	QuotedMessage ContextInfoQuotedMessage `json:"quotedMessage"`
+	Participant   string                   `json:"participant,omitempty"`
+	StanzaId      string                   `json:"stanzaId,omitempty"`
+	QuotedMessage ContextInfoQuotedMessage `json:"quotedMessage,omitempty"`
 }
 
 type ContextInfoQuotedMessage struct {
-	Conversation string `json:"conversation"`
+	Conversation string `json:"conversation,omitempty"`
 }
 
 func (s *Client) SendTextMessage(ctx context.Context, req *TextMessageRequest, instanceName string) (*TextMessageResponse, error) {
@@ -96,55 +96,55 @@ func (s *Client) SendTextMessage(ctx context.Context, req *TextMessageRequest, i
 }
 
 type MediaMessageRequest struct {
-	Number           string               `json:"number"`
-	Mediatype        string               `json:"mediatype"`
-	Mimetype         string               `json:"mimetype"`
-	Caption          string               `json:"caption"`
-	Media            string               `json:"media"`
-	FileName         string               `json:"fileName"`
-	Delay            int                  `json:"delay"`
-	Quoted           MessageRequestQuoted `json:"quoted"`
-	MentionsEveryOne bool                 `json:"mentionsEveryOne"`
-	Mentioned        []string             `json:"mentioned"`
+	Number           string               `json:"number,omitempty"`
+	Mediatype        string               `json:"mediatype,omitempty"`
+	Mimetype         string               `json:"mimetype,omitempty"`
+	Caption          string               `json:"caption,omitempty"`
+	Media            string               `json:"media,omitempty"`
+	FileName         string               `json:"fileName,omitempty"`
+	Delay            int                  `json:"delay,omitempty"`
+	Quoted           MessageRequestQuoted `json:"quoted,omitempty"`
+	MentionsEveryOne bool                 `json:"mentionsEveryOne,omitempty"`
+	Mentioned        []string             `json:"mentioned,omitempty"`
 }
 
 type MediaMessageResponse struct {
-	Key              MediaMessageResponseKey     `json:"key"`
-	PushName         string                      `json:"pushName"`
-	Status           string                      `json:"status"`
-	Message          MediaMessageResponseMessage `json:"message"`
-	ContextInfo      any                         `json:"contextInfo"`
-	MessageType      string                      `json:"messageType"`
-	MessageTimestamp int                         `json:"messageTimestamp"`
-	InstanceId       string                      `json:"instanceId"`
-	Source           string                      `json:"source"`
+	Key              MediaMessageResponseKey     `json:"key,omitempty"`
+	PushName         string                      `json:"pushName,omitempty"`
+	Status           string                      `json:"status,omitempty"`
+	Message          MediaMessageResponseMessage `json:"message,omitempty"`
+	ContextInfo      any                         `json:"contextInfo,omitempty"`
+	MessageType      string                      `json:"messageType,omitempty"`
+	MessageTimestamp int                         `json:"messageTimestamp,omitempty"`
+	InstanceId       string                      `json:"instanceId,omitempty"`
+	Source           string                      `json:"source,omitempty"`
 }
 
 type MediaMessageResponseKey struct {
-	RemoteJid string `json:"remoteJid"`
-	FromMe    bool   `json:"fromMe"`
-	Id        string `json:"id"`
+	RemoteJid string `json:"remoteJid,omitempty"`
+	FromMe    bool   `json:"fromMe,omitempty"`
+	Id        string `json:"id,omitempty"`
 }
 
 type MediaMessageResponseMessage struct {
-	ImageMessage MediaMessageResponseMessageImage `json:"imageMessage"`
-	Base64       string                           `json:"base64"`
+	ImageMessage MediaMessageResponseMessageImage `json:"imageMessage,omitempty"`
+	Base64       string                           `json:"base64,omitempty"`
 }
 
 type MediaMessageResponseMessageImage struct {
-	Url               string `json:"url"`
-	Mimetype          string `json:"mimetype"`
-	Caption           string `json:"caption"`
-	FileSha256        string `json:"fileSha256"`
-	FileLength        string `json:"fileLength"`
-	Height            int    `json:"height"`
-	Width             int    `json:"width"`
-	MediaKey          string `json:"mediaKey"`
-	FileEncSha256     string `json:"fileEncSha256"`
-	DirectPath        string `json:"directPath"`
-	MediaKeyTimestamp string `json:"mediaKeyTimestamp"`
-	JpegThumbnail     string `json:"jpegThumbnail"`
-	ContextInfo       any    `json:"contextInfo"`
+	Url               string `json:"url,omitempty"`
+	Mimetype          string `json:"mimetype,omitempty"`
+	Caption           string `json:"caption,omitempty"`
+	FileSha256        string `json:"fileSha256,omitempty"`
+	FileLength        string `json:"fileLength,omitempty"`
+	Height            int    `json:"height,omitempty"`
+	Width             int    `json:"width,omitempty"`
+	MediaKey          string `json:"mediaKey,omitempty"`
+	FileEncSha256     string `json:"fileEncSha256,omitempty"`
+	DirectPath        string `json:"directPath,omitempty"`
+	MediaKeyTimestamp string `json:"mediaKeyTimestamp,omitempty"`
+	JpegThumbnail     string `json:"jpegThumbnail,omitempty"`
+	ContextInfo       any    `json:"contextInfo,omitempty"`
 }
 
 func (s *Client) SendMediaMessage(ctx context.Context, req *MediaMessageRequest, instanceName string) (*TextMessageResponse, error) {
