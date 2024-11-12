@@ -27,7 +27,7 @@ func (s *Client) request(ctx context.Context, reqBody any, method, endpoint stri
 	}
 
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", fmt.Sprintf("Token %s", s.apiKey))
+	req.Header.Set("apikey", s.apiKey)
 
 	return s.httpClient.Do(req)
 }
