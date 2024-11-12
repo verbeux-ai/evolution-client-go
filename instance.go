@@ -10,107 +10,107 @@ import (
 )
 
 type CreateInstanceRequest struct {
-	InstanceName                    string                        `json:"instanceName"`
-	Qrcode                          bool                          `json:"qrcode"`
-	Integration                     string                        `json:"integration"`
-	RejectCall                      bool                          `json:"rejectCall"`
-	MsgCall                         string                        `json:"msgCall"`
-	GroupsIgnore                    bool                          `json:"groupsIgnore"`
-	AlwaysOnline                    bool                          `json:"alwaysOnline"`
-	ReadMessages                    bool                          `json:"readMessages"`
-	ReadStatus                      bool                          `json:"readStatus"`
-	SyncFullHistory                 bool                          `json:"syncFullHistory"`
-	ProxyHost                       string                        `json:"proxyHost"`
-	ProxyPort                       string                        `json:"proxyPort"`
-	ProxyProtocol                   string                        `json:"proxyProtocol"`
-	ProxyUsername                   string                        `json:"proxyUsername"`
-	ProxyPassword                   string                        `json:"proxyPassword"`
-	Webhook                         CreateInstanceRequestWebhook  `json:"webhook"`
-	Rabbitmq                        CreateInstanceRequestRabbitMQ `json:"rabbitmq"`
-	Sqs                             CreateInstanceRequestSqs      `json:"sqs"`
-	ChatwootAccountId               string                        `json:"chatwootAccountId"`
-	ChatwootToken                   string                        `json:"chatwootToken"`
-	ChatwootUrl                     string                        `json:"chatwootUrl"`
-	ChatwootSignMsg                 bool                          `json:"chatwootSignMsg"`
-	ChatwootReopenConversation      bool                          `json:"chatwootReopenConversation"`
-	ChatwootConversationPending     bool                          `json:"chatwootConversationPending"`
-	ChatwootImportContacts          bool                          `json:"chatwootImportContacts"`
-	ChatwootNameInbox               string                        `json:"chatwootNameInbox"`
-	ChatwootMergeBrazilContacts     bool                          `json:"chatwootMergeBrazilContacts"`
-	ChatwootImportMessages          bool                          `json:"chatwootImportMessages"`
-	ChatwootDaysLimitImportMessages int                           `json:"chatwootDaysLimitImportMessages"`
-	ChatwootOrganization            string                        `json:"chatwootOrganization"`
-	ChatwootLogo                    string                        `json:"chatwootLogo"`
+	InstanceName                    string                         `json:"instanceName,omitempty"`
+	Qrcode                          bool                           `json:"qrcode,omitempty"`
+	Integration                     string                         `json:"integration,omitempty"`
+	RejectCall                      bool                           `json:"rejectCall,omitempty"`
+	MsgCall                         string                         `json:"msgCall,omitempty"`
+	GroupsIgnore                    bool                           `json:"groupsIgnore,omitempty"`
+	AlwaysOnline                    bool                           `json:"alwaysOnline,omitempty"`
+	ReadMessages                    bool                           `json:"readMessages,omitempty"`
+	ReadStatus                      bool                           `json:"readStatus,omitempty"`
+	SyncFullHistory                 bool                           `json:"syncFullHistory,omitempty"`
+	ProxyHost                       string                         `json:"proxyHost,omitempty"`
+	ProxyPort                       string                         `json:"proxyPort,omitempty"`
+	ProxyProtocol                   string                         `json:"proxyProtocol,omitempty"`
+	ProxyUsername                   string                         `json:"proxyUsername,omitempty"`
+	ProxyPassword                   string                         `json:"proxyPassword,omitempty"`
+	Webhook                         *CreateInstanceRequestWebhook  `json:"webhook,omitempty"`
+	Rabbitmq                        *CreateInstanceRequestRabbitMQ `json:"rabbitmq,omitempty"`
+	Sqs                             *CreateInstanceRequestSqs      `json:"sqs,omitempty"`
+	ChatwootAccountId               string                         `json:"chatwootAccountId,omitempty"`
+	ChatwootToken                   string                         `json:"chatwootToken,omitempty"`
+	ChatwootUrl                     string                         `json:"chatwootUrl,omitempty"`
+	ChatwootSignMsg                 bool                           `json:"chatwootSignMsg,omitempty"`
+	ChatwootReopenConversation      bool                           `json:"chatwootReopenConversation,omitempty"`
+	ChatwootConversationPending     bool                           `json:"chatwootConversationPending,omitempty"`
+	ChatwootImportContacts          bool                           `json:"chatwootImportContacts,omitempty"`
+	ChatwootNameInbox               string                         `json:"chatwootNameInbox,omitempty"`
+	ChatwootMergeBrazilContacts     bool                           `json:"chatwootMergeBrazilContacts,omitempty"`
+	ChatwootImportMessages          bool                           `json:"chatwootImportMessages,omitempty"`
+	ChatwootDaysLimitImportMessages int                            `json:"chatwootDaysLimitImportMessages,omitempty"`
+	ChatwootOrganization            string                         `json:"chatwootOrganization,omitempty"`
+	ChatwootLogo                    string                         `json:"chatwootLogo,omitempty"`
 }
 
 type CreateInstanceRequestWebhook struct {
-	Url      string            `json:"url"`
-	ByEvents bool              `json:"byEvents"`
-	Base64   bool              `json:"base64"`
-	Headers  map[string]string `json:"headers"`
-	Events   []string          `json:"events"`
+	Url      string            `json:"url,omitempty"`
+	ByEvents bool              `json:"byEvents,omitempty"`
+	Base64   bool              `json:"base64,omitempty"`
+	Headers  map[string]string `json:"headers,omitempty"`
+	Events   []string          `json:"events,omitempty"`
 }
 
 type CreateInstanceRequestRabbitMQ struct {
-	Enabled bool     `json:"enabled"`
-	Events  []string `json:"events"`
+	Enabled bool     `json:"enabled,omitempty"`
+	Events  []string `json:"events,omitempty"`
 }
 
 type CreateInstanceRequestSqs struct {
-	Enabled bool     `json:"enabled"`
-	Events  []string `json:"events"`
+	Enabled bool     `json:"enabled,omitempty"`
+	Events  []string `json:"events,omitempty"`
 }
 
 type CreateInstanceResponse struct {
-	Instance  Instance                       `json:"instance"`
-	Hash      string                         `json:"hash"`
-	Webhook   CreateInstanceWebhookResponse  `json:"webhook"`
-	Websocket any                            `json:"websocket"`
-	Rabbitmq  CreateInstanceRabbitMQResponse `json:"rabbitmq"`
-	Sqs       CreateInstanceSqsResponse      `json:"sqs"`
-	Settings  CreateInstanceSettingsResponse `json:"settings"`
-	Qrcode    CreateInstanceQrCodeResponse   `json:"qrcode"`
+	Instance  Instance                       `json:"instance,omitempty"`
+	Hash      string                         `json:"hash,omitempty"`
+	Webhook   CreateInstanceWebhookResponse  `json:"webhook,omitempty"`
+	Websocket any                            `json:"websocket,omitempty"`
+	Rabbitmq  CreateInstanceRabbitMQResponse `json:"rabbitmq,omitempty"`
+	Sqs       CreateInstanceSqsResponse      `json:"sqs,omitempty"`
+	Settings  CreateInstanceSettingsResponse `json:"settings,omitempty"`
+	Qrcode    CreateInstanceQrCodeResponse   `json:"qrcode,omitempty"`
 }
 
 type Instance struct {
-	InstanceName          string      `json:"instanceName"`
-	InstanceId            string      `json:"instanceId"`
-	Integration           string      `json:"integration"`
-	WebhookWaBusiness     interface{} `json:"webhookWaBusiness"`
-	AccessTokenWaBusiness string      `json:"accessTokenWaBusiness"`
-	Status                string      `json:"status"`
+	InstanceName          string      `json:"instanceName,omitempty"`
+	InstanceId            string      `json:"instanceId,omitempty"`
+	Integration           string      `json:"integration,omitempty"`
+	WebhookWaBusiness     interface{} `json:"webhookWaBusiness,omitempty"`
+	AccessTokenWaBusiness string      `json:"accessTokenWaBusiness,omitempty"`
+	Status                string      `json:"status,omitempty"`
 }
 
 type CreateInstanceWebhookResponse struct {
-	WebhookUrl      string            `json:"webhookUrl"`
-	WebhookHeaders  map[string]string `json:"webhookHeaders"`
-	WebhookByEvents bool              `json:"webhookByEvents"`
-	WebhookBase64   bool              `json:"webhookBase64"`
+	WebhookUrl      string            `json:"webhookUrl,omitempty"`
+	WebhookHeaders  map[string]string `json:"webhookHeaders,omitempty"`
+	WebhookByEvents bool              `json:"webhookByEvents,omitempty"`
+	WebhookBase64   bool              `json:"webhookBase64,omitempty"`
 }
 
 type CreateInstanceRabbitMQResponse struct {
-	Enabled bool `json:"enabled"`
+	Enabled bool `json:"enabled,omitempty"`
 }
 
 type CreateInstanceSqsResponse struct {
-	Enabled bool `json:"enabled"`
+	Enabled bool `json:"enabled,omitempty"`
 }
 
 type CreateInstanceSettingsResponse struct {
-	RejectCall      bool   `json:"rejectCall"`
-	MsgCall         string `json:"msgCall"`
-	GroupsIgnore    bool   `json:"groupsIgnore"`
-	AlwaysOnline    bool   `json:"alwaysOnline"`
-	ReadMessages    bool   `json:"readMessages"`
-	ReadStatus      bool   `json:"readStatus"`
-	SyncFullHistory bool   `json:"syncFullHistory"`
+	RejectCall      bool   `json:"rejectCall,omitempty"`
+	MsgCall         string `json:"msgCall,omitempty"`
+	GroupsIgnore    bool   `json:"groupsIgnore,omitempty"`
+	AlwaysOnline    bool   `json:"alwaysOnline,omitempty"`
+	ReadMessages    bool   `json:"readMessages,omitempty"`
+	ReadStatus      bool   `json:"readStatus,omitempty"`
+	SyncFullHistory bool   `json:"syncFullHistory,omitempty"`
 }
 
 type CreateInstanceQrCodeResponse struct {
-	PairingCode interface{} `json:"pairingCode"`
-	Code        string      `json:"code"`
-	Base64      string      `json:"base64"`
-	Count       int         `json:"count"`
+	PairingCode interface{} `json:"pairingCode,omitempty"`
+	Code        string      `json:"code,omitempty"`
+	Base64      string      `json:"base64,omitempty"`
+	Count       int         `json:"count,omitempty"`
 }
 
 func (s *Client) CreateInstance(ctx context.Context, d *CreateInstanceRequest) (*CreateInstanceResponse, error) {
@@ -138,13 +138,9 @@ func (s *Client) CreateInstance(ctx context.Context, d *CreateInstanceRequest) (
 	return &toReturn, nil
 }
 
-type RestartInstanceRequest struct {
-	InstanceName string `json:"instanceName"`
-}
-
 type RestartInstanceResponse struct {
-	Error   bool   `json:"error"`
-	Message string `json:"message"`
+	Error   bool   `json:"error,omitempty"`
+	Message string `json:"message,omitempty"`
 }
 
 func (s *Client) RestartInstance(ctx context.Context, d *Instance) (*RestartInstanceResponse, error) {
@@ -173,13 +169,13 @@ func (s *Client) RestartInstance(ctx context.Context, d *Instance) (*RestartInst
 }
 
 type LogoutInstanceResponse struct {
-	Status   string         `json:"status"`
-	Error    bool           `json:"error"`
-	Response LogoutResponse `json:"response"`
+	Status   string         `json:"status,omitempty"`
+	Error    bool           `json:"error,omitempty"`
+	Response LogoutResponse `json:"response,omitempty"`
 }
 
 type LogoutResponse struct {
-	Message string `json:"message"`
+	Message string `json:"message,omitempty"`
 }
 
 func (s *Client) LogoutInstance(ctx context.Context, d *Instance) (*LogoutInstanceResponse, error) {
@@ -208,13 +204,13 @@ func (s *Client) LogoutInstance(ctx context.Context, d *Instance) (*LogoutInstan
 }
 
 type DeleteInstanceResponse struct {
-	Status   string         `json:"status"`
-	Error    bool           `json:"error"`
-	Response DeleteResponse `json:"response"`
+	Status   string         `json:"status,omitempty"`
+	Error    bool           `json:"error,omitempty"`
+	Response DeleteResponse `json:"response,omitempty"`
 }
 
 type DeleteResponse struct {
-	Message string `json:"message"`
+	Message string `json:"message,omitempty"`
 }
 
 func (s *Client) DeleteInstance(ctx context.Context, d *Instance) (*DeleteInstanceResponse, error) {
@@ -243,10 +239,10 @@ func (s *Client) DeleteInstance(ctx context.Context, d *Instance) (*DeleteInstan
 }
 
 type GetInstanceConnectResponse struct {
-	PairingCode interface{} `json:"pairingCode"`
-	Code        string      `json:"code"`
-	Base64      string      `json:"base64"`
-	Count       int         `json:"count"`
+	PairingCode interface{} `json:"pairingCode,omitempty"`
+	Code        string      `json:"code,omitempty"`
+	Base64      string      `json:"base64,omitempty"`
+	Count       int         `json:"count,omitempty"`
 }
 
 func (s *Client) GetConnectInstance(ctx context.Context, d *Instance) (*GetInstanceConnectResponse, error) {
@@ -275,12 +271,12 @@ func (s *Client) GetConnectInstance(ctx context.Context, d *Instance) (*GetInsta
 }
 
 type GetConnectionStateInstanceResponse struct {
-	Instance InstanceConnectionState `json:"instance"`
+	Instance InstanceConnectionState `json:"instance,omitempty"`
 }
 
 type InstanceConnectionState struct {
-	InstanceName string `json:"instanceName"`
-	State        string `json:"state"`
+	InstanceName string `json:"instanceName,omitempty"`
+	State        string `json:"state,omitempty"`
 }
 
 func (s *Client) GetConnectionStateInstance(ctx context.Context, d *Instance) (*GetConnectionStateInstanceResponse, error) {

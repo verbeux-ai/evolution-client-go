@@ -10,13 +10,13 @@ import (
 )
 
 type TextMessageRequest struct {
-	Number           string               `json:"number,omitempty"`
-	Text             string               `json:"text,omitempty"`
-	Delay            int                  `json:"delay,omitempty"`
-	Quoted           MessageRequestQuoted `json:"quoted,omitempty"`
-	LinkPreview      bool                 `json:"linkPreview,omitempty"`
-	MentionsEveryOne bool                 `json:"mentionsEveryOne,omitempty"`
-	Mentioned        []string             `json:"mentioned,omitempty"`
+	Number           string                `json:"number,omitempty"`
+	Text             string                `json:"text,omitempty"`
+	Delay            int                   `json:"delay,omitempty"`
+	Quoted           *MessageRequestQuoted `json:"quoted,omitempty"`
+	LinkPreview      bool                  `json:"linkPreview,omitempty"`
+	MentionsEveryOne bool                  `json:"mentionsEveryOne,omitempty"`
+	Mentioned        []string              `json:"mentioned,omitempty"`
 }
 
 type MessageRequestQuoted struct {
@@ -96,16 +96,16 @@ func (s *Client) SendTextMessage(ctx context.Context, req *TextMessageRequest, i
 }
 
 type MediaMessageRequest struct {
-	Number           string               `json:"number,omitempty"`
-	Mediatype        string               `json:"mediatype,omitempty"`
-	Mimetype         string               `json:"mimetype,omitempty"`
-	Caption          string               `json:"caption,omitempty"`
-	Media            string               `json:"media,omitempty"`
-	FileName         string               `json:"fileName,omitempty"`
-	Delay            int                  `json:"delay,omitempty"`
-	Quoted           MessageRequestQuoted `json:"quoted,omitempty"`
-	MentionsEveryOne bool                 `json:"mentionsEveryOne,omitempty"`
-	Mentioned        []string             `json:"mentioned,omitempty"`
+	Number           string                `json:"number,omitempty"`
+	Mediatype        string                `json:"mediatype,omitempty"`
+	Mimetype         string                `json:"mimetype,omitempty"`
+	Caption          string                `json:"caption,omitempty"`
+	Media            string                `json:"media,omitempty"`
+	FileName         string                `json:"fileName,omitempty"`
+	Delay            int                   `json:"delay,omitempty"`
+	Quoted           *MessageRequestQuoted `json:"quoted,omitempty"`
+	MentionsEveryOne bool                  `json:"mentionsEveryOne,omitempty"`
+	Mentioned        []string              `json:"mentioned,omitempty"`
 }
 
 type MediaMessageResponse struct {
