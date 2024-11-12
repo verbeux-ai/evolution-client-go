@@ -7,4 +7,7 @@ const (
 	deleteInstanceEndpoint             = "instance/delete"          // DELETE
 	getConnectInstanceEndpoint         = "instance/connect"         // GET
 	getConnectionStateInstanceEndpoint = "instance/connectionState" // GET
+
+	sendMessageTextEndpoint  = "message/sendText"  // POST
+	sendMessageMediaEndpoint = "message/sendMedia" // POST
 )
