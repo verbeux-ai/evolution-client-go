@@ -113,8 +113,8 @@ type CreateInstanceQrCodeResponse struct {
 	Count       int         `json:"count,omitempty"`
 }
 
-func (s *Client) CreateInstance(ctx context.Context, d *CreateInstanceRequest) (*CreateInstanceResponse, error) {
-	resp, err := s.request(ctx, d, http.MethodPost, createInstanceEndpoint)
+func (s *Client) CreateInstance(ctx context.Context, req *CreateInstanceRequest) (*CreateInstanceResponse, error) {
+	resp, err := s.request(ctx, req, http.MethodPost, createInstanceEndpoint)
 	if err != nil {
 		return nil, err
 	}
@@ -139,14 +139,13 @@ func (s *Client) CreateInstance(ctx context.Context, d *CreateInstanceRequest) (
 }
 
 type RestartInstanceResponse struct {
-	Error   bool   `json:"error,omitempty"`
-	Message string `json:"message,omitempty"`
+	Instance Instance `json:"instance"`
 }
 
-func (s *Client) RestartInstance(ctx context.Context, d *Instance) (*RestartInstanceResponse, error) {
-	url := fmt.Sprintf("%s/%s", restartInstanceEndpoint, d.InstanceName)
+func (s *Client) RestartInstance(ctx context.Context, instanceName string) (*RestartInstanceResponse, error) {
+	url := fmt.Sprintf(restartInstanceEndpoint, instanceName)
 
-	resp, err := s.request(ctx, d, http.MethodPost, url)
+	resp, err := s.request(ctx, nil, http.MethodPost, url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request: %w", err)
 	}
@@ -178,10 +177,10 @@ type LogoutResponse struct {
 	Message string `json:"message,omitempty"`
 }
 
-func (s *Client) LogoutInstance(ctx context.Context, d *Instance) (*LogoutInstanceResponse, error) {
-	url := fmt.Sprintf("%s/%s", logoutInstanceEndpoint, d.InstanceName)
+func (s *Client) LogoutInstance(ctx context.Context, instanceName string) (*LogoutInstanceResponse, error) {
+	url := fmt.Sprintf(logoutInstanceEndpoint, instanceName)
 
-	resp, err := s.request(ctx, d, http.MethodDelete, url)
+	resp, err := s.request(ctx, nil, http.MethodDelete, url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request: %w", err)
 	}
@@ -213,10 +212,10 @@ type DeleteResponse struct {
 	Message string `json:"message,omitempty"`
 }
 
-func (s *Client) DeleteInstance(ctx context.Context, d *Instance) (*DeleteInstanceResponse, error) {
-	url := fmt.Sprintf("%s/%s", deleteInstanceEndpoint, d.InstanceName)
+func (s *Client) DeleteInstance(ctx context.Context, instanceName string) (*DeleteInstanceResponse, error) {
+	url := fmt.Sprintf(deleteInstanceEndpoint, instanceName)
 
-	resp, err := s.request(ctx, d, http.MethodDelete, url)
+	resp, err := s.request(ctx, nil, http.MethodDelete, url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request: %w", err)
 	}
@@ -245,10 +244,10 @@ type GetInstanceConnectResponse struct {
 	Count       int         `json:"count,omitempty"`
 }
 
-func (s *Client) GetConnectInstance(ctx context.Context, d *Instance) (*GetInstanceConnectResponse, error) {
-	url := fmt.Sprintf("%s/%s", getConnectInstanceEndpoint, d.InstanceName)
+func (s *Client) ConnectInstance(ctx context.Context, instanceName string) (*GetInstanceConnectResponse, error) {
+	url := fmt.Sprintf(getConnectInstanceEndpoint, instanceName)
 
-	resp, err := s.request(ctx, d, http.MethodGet, url)
+	resp, err := s.request(ctx, nil, http.MethodGet, url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request: %w", err)
 	}
@@ -279,10 +278,10 @@ type InstanceConnectionState struct {
 	State        string `json:"state,omitempty"`
 }
 
-func (s *Client) GetConnectionStateInstance(ctx context.Context, d *Instance) (*GetConnectionStateInstanceResponse, error) {
-	url := fmt.Sprintf("%s/%s", getConnectionStateInstanceEndpoint, d.InstanceName)
+func (s *Client) ConnectionStateInstance(ctx context.Context, instanceName string) (*GetConnectionStateInstanceResponse, error) {
+	url := fmt.Sprintf(getConnectionStateInstanceEndpoint, instanceName)
 
-	resp, err := s.request(ctx, d, http.MethodGet, url)
+	resp, err := s.request(ctx, nil, http.MethodGet, url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to make request: %w", err)
 	}

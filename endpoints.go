@@ -1,13 +1,16 @@
 package evolution
 
 const (
-	createInstanceEndpoint             = "instance/create"          // POST
-	restartInstanceEndpoint            = "instance/restart"         // POST
-	logoutInstanceEndpoint             = "instance/logout"          // DELETE
-	deleteInstanceEndpoint             = "instance/delete"          // DELETE
-	getConnectInstanceEndpoint         = "instance/connect"         // GET
-	getConnectionStateInstanceEndpoint = "instance/connectionState" // GET
+	createInstanceEndpoint             = "instance/create"             // POST
+	restartInstanceEndpoint            = "instance/restart/%s"         // POST
+	logoutInstanceEndpoint             = "instance/logout/%s"          // DELETE
+	deleteInstanceEndpoint             = "instance/delete/%s"          // DELETE
+	getConnectInstanceEndpoint         = "instance/connect/%s"         // GET
+	getConnectionStateInstanceEndpoint = "instance/connectionState/%s" // GET
 
-	sendMessageTextEndpoint  = "message/sendText"  // POST
-	sendMessageMediaEndpoint = "message/sendMedia" // POST
+	sendMessageTextEndpoint  = "message/sendText/%s"  // POST
+	sendMessageMediaEndpoint = "message/sendMedia/%s" // POST
+
+	findLabelsEndpoint  = "label/findLabels/%s"
+	handleLabelEndpoint = "label/handleLabel/%s"
 )

@@ -2,8 +2,10 @@ package evolution_test
 
 import (
 	"context"
-	"github.com/verbeux-ai/evolution-client-go"
+	"os"
 	"testing"
+
+	"github.com/verbeux-ai/evolution-client-go"
 
 	"github.com/stretchr/testify/require"
 )
@@ -12,7 +14,7 @@ func TestCreateInstance(t *testing.T) {
 	ctx := context.Background()
 
 	result, err := client.CreateInstance(ctx, &evolution.CreateInstanceRequest{
-		InstanceName:    "Testing",
+		InstanceName:    os.Getenv("INSTANCE_NAME"),
 		Qrcode:          false,
 		Integration:     "WHATSAPP-BAILEYS",
 		RejectCall:      false,
@@ -27,7 +29,7 @@ func TestCreateInstance(t *testing.T) {
 		ProxyProtocol:   "",
 		ProxyUsername:   "",
 		ProxyPassword:   "",
-		Webhook: evolution.CreateInstanceRequestWebhook{
+		Webhook: &evolution.CreateInstanceRequestWebhook{
 			Url:      "https://webhook.site/89930b26-a76e-425b-a59f-36f925f0863c",
 			ByEvents: false,
 			Base64:   true,
@@ -61,8 +63,8 @@ func TestCreateInstance(t *testing.T) {
 				"TYPEBOT_CHANGE_STATUS",
 			},
 		},
-		Rabbitmq:                        evolution.CreateInstanceRequestRabbitMQ{},
-		Sqs:                             evolution.CreateInstanceRequestSqs{},
+		Rabbitmq:                        &evolution.CreateInstanceRequestRabbitMQ{},
+		Sqs:                             &evolution.CreateInstanceRequestSqs{},
 		ChatwootAccountId:               "",
 		ChatwootToken:                   "",
 		ChatwootUrl:                     "",
@@ -83,45 +85,35 @@ func TestCreateInstance(t *testing.T) {
 
 func TestRestartInstance(t *testing.T) {
 	ctx := context.Background()
-	result, err := client.RestartInstance(ctx, &evolution.Instance{
-		InstanceName: "Testing",
-	})
+	result, err := client.RestartInstance(ctx, os.Getenv("INSTANCE_NAME"))
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }
 
 func TestLogoutInstance(t *testing.T) {
 	ctx := context.Background()
-	result, err := client.LogoutInstance(ctx, &evolution.Instance{
-		InstanceName: "Testing",
-	})
+	result, err := client.LogoutInstance(ctx, os.Getenv("INSTANCE_NAME"))
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }
 
 func TestDeleteInstance(t *testing.T) {
 	ctx := context.Background()
-	result, err := client.DeleteInstance(ctx, &evolution.Instance{
-		InstanceName: "Testing",
-	})
+	result, err := client.DeleteInstance(ctx, os.Getenv("INSTANCE_NAME"))
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }
 
-func TestGetConnectInstance(t *testing.T) {
+func TestConnectInstance(t *testing.T) {
 	ctx := context.Background()
-	result, err := client.GetConnectInstance(ctx, &evolution.Instance{
-		InstanceName: "Testing",
-	})
+	result, err := client.ConnectInstance(ctx, os.Getenv("INSTANCE_NAME"))
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }
 
 func TestGetConnectionStateInstance(t *testing.T) {
 	ctx := context.Background()
-	result, err := client.GetConnectionStateInstance(ctx, &evolution.Instance{
-		InstanceName: "Testing",
-	})
+	result, err := client.ConnectionStateInstance(ctx, os.Getenv("INSTANCE_NAME"))
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }

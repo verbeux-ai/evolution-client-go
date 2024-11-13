@@ -64,8 +64,8 @@ type ContextInfoQuotedMessage struct {
 	Conversation string `json:"conversation,omitempty"`
 }
 
-func (s *Client) SendTextMessage(ctx context.Context, req *TextMessageRequest, instanceName string) (*TextMessageResponse, error) {
-	url := fmt.Sprintf("%s/%s", sendMessageTextEndpoint, instanceName)
+func (s *Client) SendTextMessage(ctx context.Context, instanceName string, req *TextMessageRequest) (*TextMessageResponse, error) {
+	url := fmt.Sprintf(sendMessageTextEndpoint, instanceName)
 
 	if req == nil {
 		return nil, fmt.Errorf("missing request object")
@@ -147,8 +147,8 @@ type MediaMessageResponseMessageImage struct {
 	ContextInfo       any    `json:"contextInfo,omitempty"`
 }
 
-func (s *Client) SendMediaMessage(ctx context.Context, req *MediaMessageRequest, instanceName string) (*TextMessageResponse, error) {
-	url := fmt.Sprintf("%s/%s", sendMessageMediaEndpoint, instanceName)
+func (s *Client) SendMediaMessage(ctx context.Context, instanceName string, req *MediaMessageRequest) (*TextMessageResponse, error) {
+	url := fmt.Sprintf(sendMessageMediaEndpoint, instanceName)
 
 	if req == nil {
 		return nil, fmt.Errorf("missing request object")
