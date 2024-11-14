@@ -8,6 +8,8 @@ const (
 	getConnectInstanceEndpoint         = "instance/connect/%s"         // GET
 	getConnectionStateInstanceEndpoint = "instance/connectionState/%s" // GET
 
+	findChatsEndpoint = "chat/findChats/%s" // GET
+
 	sendMessageTextEndpoint  = "message/sendText/%s"  // POST
 	sendMessageMediaEndpoint = "message/sendMedia/%s" // POST
 

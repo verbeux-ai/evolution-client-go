@@ -9,6 +9,10 @@ import (
 	"net/http"
 )
 
+type QueryFilters[T any] struct {
+	Where T `json:"where"`
+}
+
 func (s *Client) request(ctx context.Context, reqBody any, method, endpoint string) (*http.Response, error) {
 	var bodyReader io.Reader
 	if reqBody != nil {
