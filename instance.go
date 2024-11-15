@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
 )
 
 type CreateInstanceRequest struct {
@@ -73,12 +74,12 @@ type CreateInstanceResponse struct {
 }
 
 type Instance struct {
-	InstanceName          string      `json:"instanceName,omitempty"`
-	InstanceId            string      `json:"instanceId,omitempty"`
-	Integration           string      `json:"integration,omitempty"`
-	WebhookWaBusiness     interface{} `json:"webhookWaBusiness,omitempty"`
-	AccessTokenWaBusiness string      `json:"accessTokenWaBusiness,omitempty"`
-	Status                string      `json:"status,omitempty"`
+	InstanceName          string `json:"instanceName,omitempty"`
+	InstanceId            string `json:"instanceId,omitempty"`
+	Integration           string `json:"integration,omitempty"`
+	WebhookWaBusiness     any    `json:"webhookWaBusiness,omitempty"`
+	AccessTokenWaBusiness string `json:"accessTokenWaBusiness,omitempty"`
+	Status                string `json:"status,omitempty"`
 }
 
 type CreateInstanceWebhookResponse struct {
@@ -107,10 +108,10 @@ type CreateInstanceSettingsResponse struct {
 }
 
 type CreateInstanceQrCodeResponse struct {
-	PairingCode interface{} `json:"pairingCode,omitempty"`
-	Code        string      `json:"code,omitempty"`
-	Base64      string      `json:"base64,omitempty"`
-	Count       int         `json:"count,omitempty"`
+	PairingCode any    `json:"pairingCode,omitempty"`
+	Code        string `json:"code,omitempty"`
+	Base64      string `json:"base64,omitempty"`
+	Count       int    `json:"count,omitempty"`
 }
 
 func (s *Client) CreateInstance(ctx context.Context, req *CreateInstanceRequest) (*CreateInstanceResponse, error) {
@@ -238,10 +239,10 @@ func (s *Client) DeleteInstance(ctx context.Context, instanceName string) (*Dele
 }
 
 type GetInstanceConnectResponse struct {
-	PairingCode interface{} `json:"pairingCode,omitempty"`
-	Code        string      `json:"code,omitempty"`
-	Base64      string      `json:"base64,omitempty"`
-	Count       int         `json:"count,omitempty"`
+	PairingCode any    `json:"pairingCode,omitempty"`
+	Code        string `json:"code,omitempty"`
+	Base64      string `json:"base64,omitempty"`
+	Count       int    `json:"count,omitempty"`
 }
 
 func (s *Client) ConnectInstance(ctx context.Context, instanceName string) (*GetInstanceConnectResponse, error) {
@@ -301,4 +302,111 @@ func (s *Client) ConnectionStateInstance(ctx context.Context, instanceName strin
 	}
 
 	return &result, nil
+}
+
+type FetchInstancesRequestFilter struct {
+	InstanceName string `query:"instanceName"`
+	InstanceID   string `query:"instanceId,omitempty"`
+	QRCode       bool   `query:"qrcode,omitempty"`
+	BusinessID   string `query:"businessId,omitempty"`
+	Number       string `query:"number,omitempty"`
+	Integration  string `query:"integration,omitempty"`
+	Token        string `query:"token,omitempty"`
+	Status       string `query:"status,omitempty"`
+
+	// Settings
+	RejectCall      bool   `query:"rejectCall,omitempty"`
+	MsgCall         string `query:"msgCall,omitempty"`
+	GroupsIgnore    bool   `query:"groupsIgnore,omitempty"`
+	AlwaysOnline    bool   `query:"alwaysOnline,omitempty"`
+	ReadMessages    bool   `query:"readMessages,omitempty"`
+	ReadStatus      bool   `query:"readStatus,omitempty"`
+	SyncFullHistory bool   `query:"syncFullHistory,omitempty"`
+
+	// Proxy
+	ProxyHost     string `query:"proxyHost,omitempty"`
+	ProxyPort     string `query:"proxyPort,omitempty"`
+	ProxyProtocol string `query:"proxyProtocol,omitempty"`
+	ProxyUsername string `query:"proxyUsername,omitempty"`
+	ProxyPassword string `query:"proxyPassword,omitempty"`
+}
+
+type FetchInstancesResponse struct {
+	Id                      string                         `json:"id"`
+	Name                    string                         `json:"name"`
+	ConnectionStatus        string                         `json:"connectionStatus"`
+	OwnerJid                string                         `json:"ownerJid"`
+	ProfileName             string                         `json:"profileName"`
+	ProfilePicUrl           string                         `json:"profilePicUrl"`
+	Integration             string                         `json:"integration"`
+	Number                  any                            `json:"number"`
+	BusinessId              any                            `json:"businessId"`
+	Token                   string                         `json:"token"`
+	ClientName              string                         `json:"clientName"`
+	DisconnectionReasonCode any                            `json:"disconnectionReasonCode"`
+	DisconnectionObject     any                            `json:"disconnectionObject"`
+	DisconnectionAt         any                            `json:"disconnectionAt"`
+	CreatedAt               time.Time                      `json:"createdAt"`
+	UpdatedAt               time.Time                      `json:"updatedAt"`
+	Chatwoot                any                            `json:"Chatwoot"`
+	Proxy                   any                            `json:"Proxy"`
+	Rabbitmq                any                            `json:"Rabbitmq"`
+	Sqs                     any                            `json:"Sqs"`
+	Websocket               any                            `json:"Websocket"`
+	Setting                 CreateInstanceResponseSettings `json:"Setting"`
+	Count                   FetchInstancesResponseCount    `json:"_count"`
+}
+
+type FetchInstancesResponseCount struct {
+	Message int `json:"Message"`
+	Contact int `json:"Contact"`
+	Chat    int `json:"Chat"`
+}
+
+type CreateInstanceResponseSettings struct {
+	Id              string    `json:"id"`
+	RejectCall      bool      `json:"rejectCall"`
+	MsgCall         string    `json:"msgCall"`
+	GroupsIgnore    bool      `json:"groupsIgnore"`
+	AlwaysOnline    bool      `json:"alwaysOnline"`
+	ReadMessages    bool      `json:"readMessages"`
+	ReadStatus      bool      `json:"readStatus"`
+	SyncFullHistory bool      `json:"syncFullHistory"`
+	CreatedAt       time.Time `json:"createdAt"`
+	UpdatedAt       time.Time `json:"updatedAt"`
+	InstanceId      string    `json:"instanceId"`
+}
+
+func (s *Client) FetchInstances(ctx context.Context, filter *FetchInstancesRequestFilter) ([]FetchInstancesResponse, error) {
+	var query string
+	var err error
+
+	if filter != nil {
+		query, err = StructToQueryString(*filter)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	url := fmt.Sprintf("%s?%s", fetchInstancesEndpoint, query)
+	resp, err := s.request(ctx, nil, http.MethodGet, url)
+	if err != nil {
+		return nil, fmt.Errorf("failed to make request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode > 399 {
+		body, readErr := io.ReadAll(resp.Body)
+		if readErr != nil {
+			return nil, fmt.Errorf("failed to read error response body: %w", readErr)
+		}
+		return nil, fmt.Errorf("failed to get connect instance with code %d: %s", resp.StatusCode, string(body))
+	}
+
+	var result []FetchInstancesResponse
+	if err = json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, fmt.Errorf("failed to decode response: %w", err)
+	}
+
+	return result, nil
 }

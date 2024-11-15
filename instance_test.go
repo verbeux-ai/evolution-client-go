@@ -117,3 +117,19 @@ func TestGetConnectionStateInstance(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }
+
+func TestFetchInstances(t *testing.T) {
+	ctx := context.Background()
+	result, err := client.FetchInstances(ctx, nil)
+	require.NoError(t, err)
+	require.NotEmpty(t, result)
+}
+
+func TestFetchInstancesFiltered(t *testing.T) {
+	ctx := context.Background()
+	result, err := client.FetchInstances(ctx, &evolution.FetchInstancesRequestFilter{
+		InstanceName: "5459c0a2-a35f-11ef-bfad-aa807b84a752",
+	})
+	require.NoError(t, err)
+	require.NotEmpty(t, result)
+}

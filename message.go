@@ -96,10 +96,11 @@ func (s *Client) SendTextMessage(ctx context.Context, instanceName string, req *
 }
 
 type MediaMessageRequest struct {
-	Number           string                `json:"number,omitempty"`
-	Mediatype        string                `json:"mediatype,omitempty"`
-	Mimetype         string                `json:"mimetype,omitempty"`
-	Caption          string                `json:"caption,omitempty"`
+	Number    string `json:"number,omitempty"`
+	Mediatype string `json:"mediatype,omitempty"`
+	Mimetype  string `json:"mimetype,omitempty"`
+	Caption   string `json:"caption,omitempty"`
+	// Media is the URL of the file
 	Media            string                `json:"media,omitempty"`
 	FileName         string                `json:"fileName,omitempty"`
 	Delay            int                   `json:"delay,omitempty"`
