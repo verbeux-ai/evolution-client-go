@@ -9,11 +9,12 @@ const (
 	fetchInstancesEndpoint             = "instance/fetchInstances"     // GET
 	getConnectionStateInstanceEndpoint = "instance/connectionState/%s" // GET
 
-	findChatsEndpoint = "chat/findChats/%s" // GET
+	findChatsEndpoint    = "chat/findChats/%s"         // GET
+	readMessagesEndpoint = "chat/markMessageAsRead/%s" // POST
 
 	sendMessageTextEndpoint  = "message/sendText/%s"  // POST
 	sendMessageMediaEndpoint = "message/sendMedia/%s" // POST
 
-	findLabelsEndpoint  = "label/findLabels/%s"
-	handleLabelEndpoint = "label/handleLabel/%s"
+	findLabelsEndpoint  = "label/findLabels/%s"  //GET
+	handleLabelEndpoint = "label/handleLabel/%s" // POST
 )

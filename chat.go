@@ -103,3 +103,48 @@ func (s *Client) FindChats(ctx context.Context, instanceName string, filter *Fin
 
 	return toReturn, nil
 }
+
+type ReadMessagesRequest struct {
+	ReadMessages []ReadMessagesRequestItem `json:"readMessages"`
+}
+type ReadMessagesRequestItem struct {
+	RemoteJid string `json:"remoteJid"`
+	FromMe    bool   `json:"fromMe"`
+	Id        string `json:"id"`
+}
+
+type ReadMessagesResponse struct {
+	Message string `json:"message"`
+	Read    string `json:"read"`
+}
+
+func (s *Client) ReadMessages(ctx context.Context, instanceName string, req *ReadMessagesRequest) (*ReadMessagesResponse, error) {
+	url := fmt.Sprintf(readMessagesEndpoint, instanceName)
+
+	if req == nil {
+		return nil, fmt.Errorf("missing request object")
+	}
+
+	resp, err := s.request(ctx, req, http.MethodPost, url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode > 399 {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		bodyErr := errors.New(string(body))
+		return nil, fmt.Errorf("failed to read message with code %d: %w", resp.StatusCode, bodyErr)
+	}
+
+	var toReturn ReadMessagesResponse
+	if err = json.NewDecoder(resp.Body).Decode(&toReturn); err != nil {
+		return nil, err
+	}
+
+	return &toReturn, nil
+}
