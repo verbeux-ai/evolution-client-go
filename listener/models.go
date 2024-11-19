@@ -6,22 +6,37 @@ import (
 
 type MessageUpsertListener func(message *MessageUpsert) error
 
-type MessageUpsertDataMessageImageMessage struct {
-	Url               string                  `json:"url"`
-	Mimetype          string                  `json:"mimetype"`
-	FileSha256        string                  `json:"fileSha256"`
-	FileLength        string                  `json:"fileLength"`
-	Height            int                     `json:"height"`
-	Width             int                     `json:"width"`
-	MediaKey          string                  `json:"mediaKey"`
-	FileEncSha256     string                  `json:"fileEncSha256"`
-	DirectPath        string                  `json:"directPath"`
-	MediaKeyTimestamp string                  `json:"mediaKeyTimestamp"`
-	JpegThumbnail     string                  `json:"jpegThumbnail"`
-	ContextInfo       ImageMessageContextInfo `json:"contextInfo"`
-	ViewOnce          bool                    `json:"viewOnce"`
+type MessageUpsertDataMessageAudioMessage struct {
+	Url               string                 `json:"url"`
+	Mimetype          string                 `json:"mimetype"`
+	FileSha256        string                 `json:"fileSha256"`
+	FileLength        string                 `json:"fileLength"`
+	Seconds           int                    `json:"seconds"`
+	Ptt               bool                   `json:"ptt"`
+	MediaKey          string                 `json:"mediaKey"`
+	FileEncSha256     string                 `json:"fileEncSha256"`
+	DirectPath        string                 `json:"directPath"`
+	MediaKeyTimestamp string                 `json:"mediaKeyTimestamp"`
+	ContextInfo       FileMessageContextInfo `json:"contextInfo"`
+	Waveform          string                 `json:"waveform"`
+	ViewOnce          bool                   `json:"viewOnce"`
 }
-type ImageMessageContextInfo struct {
+type MessageUpsertDataMessageImageMessage struct {
+	Url               string                 `json:"url"`
+	Mimetype          string                 `json:"mimetype"`
+	FileSha256        string                 `json:"fileSha256"`
+	FileLength        string                 `json:"fileLength"`
+	Height            int                    `json:"height"`
+	Width             int                    `json:"width"`
+	MediaKey          string                 `json:"mediaKey"`
+	FileEncSha256     string                 `json:"fileEncSha256"`
+	DirectPath        string                 `json:"directPath"`
+	MediaKeyTimestamp string                 `json:"mediaKeyTimestamp"`
+	JpegThumbnail     string                 `json:"jpegThumbnail"`
+	ContextInfo       FileMessageContextInfo `json:"contextInfo"`
+	ViewOnce          bool                   `json:"viewOnce"`
+}
+type FileMessageContextInfo struct {
 	DisappearingMode MessageUpsertDataContextInfoDisappearingMode `json:"disappearingMode"`
 }
 
