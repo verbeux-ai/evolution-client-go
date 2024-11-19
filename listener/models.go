@@ -6,6 +6,40 @@ import (
 
 type MessageUpsertListener func(message *MessageUpsert) error
 
+type MessageUpsertDataMessageImageMessage struct {
+	Url               string                  `json:"url"`
+	Mimetype          string                  `json:"mimetype"`
+	FileSha256        string                  `json:"fileSha256"`
+	FileLength        string                  `json:"fileLength"`
+	Height            int                     `json:"height"`
+	Width             int                     `json:"width"`
+	MediaKey          string                  `json:"mediaKey"`
+	FileEncSha256     string                  `json:"fileEncSha256"`
+	DirectPath        string                  `json:"directPath"`
+	MediaKeyTimestamp string                  `json:"mediaKeyTimestamp"`
+	JpegThumbnail     string                  `json:"jpegThumbnail"`
+	ContextInfo       ImageMessageContextInfo `json:"contextInfo"`
+	ViewOnce          bool                    `json:"viewOnce"`
+}
+type ImageMessageContextInfo struct {
+	DisappearingMode MessageUpsertDataContextInfoDisappearingMode `json:"disappearingMode"`
+}
+
+type MessageUpsertDataMessageMessageContextInfo struct {
+	DeviceListMetadata        MessageContextInfoDeviceListMetadata `json:"deviceListMetadata"`
+	DeviceListMetadataVersion int                                  `json:"deviceListMetadataVersion"`
+	MessageSecret             string                               `json:"messageSecret"`
+}
+
+type MessageContextInfoDeviceListMetadata struct {
+	SenderKeyHash       string `json:"senderKeyHash"`
+	SenderTimestamp     string `json:"senderTimestamp"`
+	SenderAccountType   string `json:"senderAccountType"`
+	ReceiverAccountType string `json:"receiverAccountType"`
+	RecipientKeyHash    string `json:"recipientKeyHash"`
+	RecipientTimestamp  string `json:"recipientTimestamp"`
+}
+
 type MessageUpsert struct {
 	Event       string            `json:"event"`
 	Instance    string            `json:"instance"`
@@ -37,7 +71,10 @@ type MessageUpsertDataKey struct {
 }
 
 type MessageUpsertDataMessage struct {
-	Conversation string `json:"conversation"`
+	Conversation       string                                     `json:"conversation"`
+	Base64             string                                     `json:"base64"`
+	ImageMessage       MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
+	MessageContextInfo MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
 }
 
 type MessageUpsertDataContextInfo struct {
