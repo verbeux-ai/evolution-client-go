@@ -89,6 +89,7 @@ type MessageUpsertDataMessage struct {
 	Conversation       string                                     `json:"conversation"`
 	Base64             string                                     `json:"base64"`
 	ImageMessage       MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
+	AudioMessage       MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
 	MessageContextInfo MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
 }
 
