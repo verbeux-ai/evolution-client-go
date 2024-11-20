@@ -7,6 +7,11 @@ whatsapp usando a linguagem go.
 Fork Verbeux da evolution: https://github.com/verbeux-ai/evolution-api/  
 Status: Em desenvolvimento
 
+## Instalando
+```go
+go get github.com/verbeux-ai/evolution-client-go
+```
+
 ## Enviando Mensagem
 
 Este é um exemplo de envio de mensagem a partir do client.
