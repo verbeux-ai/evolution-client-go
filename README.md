@@ -16,15 +16,15 @@ import evolution "github.com/verbeux-ai/evolution-client-go"
 import "context"
 
 client = evolution.NewClient(
-evolution.WithApiKey(os.Getenv("API_KEY")),
-evolution.WithBaseUrl(os.Getenv("BASE_URL")),
+    evolution.WithApiKey(os.Getenv("API_KEY")),
+    evolution.WithBaseUrl(os.Getenv("BASE_URL")),
 )
 response, err := client.SendTextMessage(context.Background(), &evolution.TextMessageRequest{
-Number:   "558500000000",
-Phone: "Teste",
+    Number:   "558500000000",
+    Phone: "Teste",
 })
 if err != nil {
-panic(err)
+    panic(err)
 }
 fmt.Println(response)
 ```
@@ -38,19 +38,19 @@ import "github.com/verbeux-ai/evolution/listener"
 
 whatsappListener := listener.NewMessageListener()
 whatsappListener.HandleErrors(func (err error) {
-fmt.Println("fail", err)
+    fmt.Println("fail", err)
 })
 
 // register listeners
 whatsappListener.OnMessage(func (message *listener.MessageUpsert) error {
 
-// treat your text message here
-
-return nil
+    // treat your text message here
+    
+    return nil
 })
 
 if err := whatsappListener.ReadBodyAsync(ctx.Request().Body); err != nil {
-panic(err)
+    panic(err)
 }
 ```
 
