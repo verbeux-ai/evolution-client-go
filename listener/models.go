@@ -27,6 +27,7 @@ type MessageUpsertDataMessageImageMessage struct {
 	FileSha256        string                 `json:"fileSha256"`
 	FileLength        string                 `json:"fileLength"`
 	Height            int                    `json:"height"`
+	Caption           string                 `json:"caption"`
 	Width             int                    `json:"width"`
 	MediaKey          string                 `json:"mediaKey"`
 	FileEncSha256     string                 `json:"fileEncSha256"`
