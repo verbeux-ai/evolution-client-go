@@ -10,7 +10,10 @@ import (
 )
 
 type QueryFilters[T any] struct {
-	Where T `json:"where"`
+	Where  T      `json:"where,omitempty"`
+	Sort   string `json:"sort,omitempty"`
+	Page   int    `json:"page,omitempty"`
+	Offset int    `json:"offset,omitempty"`
 }
 
 func (s *Client) request(ctx context.Context, reqBody any, method, endpoint string) (*http.Response, error) {

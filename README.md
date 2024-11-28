@@ -61,20 +61,22 @@ if err := whatsappListener.ReadBodyAsync(ctx.Request().Body); err != nil {
 
 ## Features disponíveis
 
-| Funcionalidade             | Implementado |
-|----------------------------|--------------|
-| Find Chats                 | Sim          |
-| Read Messages              | Sim          |
-| Create Instance            | Sim          |
-| Restart Instance           | Sim          |
-| Logout Instance            | Sim          |
-| Delete Instance            | Sim          |
-| Connect Instance           | Sim          |
-| Connection State Instance  | Sim          |
-| Fetch Instances            | Sim          |
-| Send Text Message          | Sim          |
-| Send Media Message         | Sim          |
-| Get Tags                   | Sim          |
-| Add Chat Tag               | Sim          |
+| Funcionalidade            | Implementado |
+|---------------------------|--------------|
+| Find Chats                | Sim          |
+| Read Messages             | Sim          |
+| Create Instance           | Sim          |
+| Restart Instance          | Sim          |
+| Logout Instance           | Sim          |
+| Delete Instance           | Sim          |
+| Connect Instance          | Sim          |
+| Connection State Instance | Sim          |
+| Fetch Instances           | Sim          |
+| Send Text Message         | Sim          |
+| Send Media Message        | Sim          |
+| Get Tags                  | Sim          |
+| Add Chat Tag              | Sim          |
+| Find Messages             | Sim          |
+| Unread Messages           | Sim          |
 
 > Você está convidado a contribuir ao repositório!
