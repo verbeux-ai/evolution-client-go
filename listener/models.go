@@ -95,13 +95,36 @@ type MessageUpsertDataMessage struct {
 }
 
 type MessageUpsertDataContextInfo struct {
-	EphemeralSettingTimestamp string                                       `json:"ephemeralSettingTimestamp"`
-	DisappearingMode          MessageUpsertDataContextInfoDisappearingMode `json:"disappearingMode"`
-	StanzaId                  string                                       `json:"stanzaId"`
-	Participant               string                                       `json:"participant"`
-	Expiration                int                                          `json:"expiration"`
-	QuotedMessage             MessageUpsertDataContextInfoQuotedMessage    `json:"quotedMessage"`
-	MentionedJid              []string                                     `json:"mentionedJid"`
+	EphemeralSettingTimestamp                   string                                       `json:"ephemeralSettingTimestamp"`
+	DisappearingMode                            MessageUpsertDataContextInfoDisappearingMode `json:"disappearingMode"`
+	StanzaId                                    string                                       `json:"stanzaId"`
+	Participant                                 string                                       `json:"participant"`
+	Expiration                                  int                                          `json:"expiration"`
+	QuotedMessage                               MessageUpsertDataContextInfoQuotedMessage    `json:"quotedMessage"`
+	MentionedJid                                []string                                     `json:"mentionedJid"`
+	ConversionSource                            string                                       `json:"conversionSource"`
+	ConversionData                              string                                       `json:"conversionData"`
+	ConversionDelaySeconds                      int                                          `json:"conversionDelaySeconds"`
+	MessageUpsertDataContextInfoExternalAdReply MessageUpsertDataContextInfoExternalAdReply  `json:"externalAdReply"`
+	EntryPointConversionSource                  string                                       `json:"entryPointConversionSource"`
+	EntryPointConversionApp                     string                                       `json:"entryPointConversionApp"`
+	EntryPointConversionDelaySeconds            int                                          `json:"entryPointConversionDelaySeconds"`
+	TrustBannerAction                           int64                                        `json:"trustBannerAction"`
+}
+
+type MessageUpsertDataContextInfoExternalAdReply struct {
+	Title                 string `json:"title"`
+	Body                  string `json:"body"`
+	MediaType             string `json:"mediaType"`
+	ThumbnailUrl          string `json:"thumbnailUrl"`
+	Thumbnail             string `json:"thumbnail"`
+	SourceType            string `json:"sourceType"`
+	SourceId              string `json:"sourceId"`
+	SourceUrl             string `json:"sourceUrl"`
+	ContainsAutoReply     bool   `json:"containsAutoReply"`
+	RenderLargerThumbnail bool   `json:"renderLargerThumbnail"`
+	ShowAdAttribution     bool   `json:"showAdAttribution"`
+	CtwaClid              string `json:"ctwaClid"`
 }
 
 type MessageUpsertDataContextInfoDisappearingMode struct {
