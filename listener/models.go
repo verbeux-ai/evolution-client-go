@@ -2,7 +2,20 @@ package listener
 
 import (
 	"time"
+
+	"github.com/verbeux-ai/evolution-client-go"
 )
+
+type wookType string
+
+const (
+	wookTypeMessageUpsert  wookType = "messages.upsert"
+	wookTypePresenceUpdate wookType = "presence.update"
+)
+
+type wookIdentifier struct {
+	Event wookType `json:"event"`
+}
 
 type MessageUpsertListener func(message *MessageUpsert) error
 
@@ -57,7 +70,6 @@ type MessageContextInfoDeviceListMetadata struct {
 }
 
 type MessageUpsert struct {
-	Event       string            `json:"event"`
 	Instance    string            `json:"instance"`
 	Data        MessageUpsertData `json:"data"`
 	Destination string            `json:"destination"`
@@ -145,4 +157,25 @@ type MessageUpsertDataContextInfoQuotedMessage struct {
 			} `json:"disappearingMode"`
 		} `json:"contextInfo"`
 	} `json:"extendedTextMessage"`
+}
+
+type PresenceUpdateListener func(data *PresenceUpdate) error
+
+type PresenceUpdate struct {
+	Instance    string             `json:"instance"`
+	Data        PresenceUpdateData `json:"data"`
+	Destination string             `json:"destination"`
+	DateTime    time.Time          `json:"date_time"`
+	Sender      string             `json:"sender"`
+	ServerUrl   string             `json:"server_url"`
+	Apikey      interface{}        `json:"apikey"`
+}
+
+type PresenceUpdateData struct {
+	Id        string                                             `json:"id"`
+	Presences map[string]PresenceUpdateDataPresencesSWhatsappNet `json:"presences"`
+}
+
+type PresenceUpdateDataPresencesSWhatsappNet struct {
+	LastKnownPresence evolution.SendPresenceRequestPresence `json:"lastKnownPresence"`
 }
