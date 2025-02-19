@@ -7,7 +7,8 @@ import (
 type listener struct {
 	chError chan error
 
-	messageUpsertListener *MessageUpsertListener
+	messageUpsertListener  *MessageUpsertListener
+	presenceUpdateListener *PresenceUpdateListener
 }
 
 func NewMessageListener() MessageListener {
@@ -38,9 +39,14 @@ func (s *listener) HandleErrors(f func(error)) (closer func()) {
 type MessageListener interface {
 	HandleErrors(f func(error)) (closer func())
 	OnMessage(MessageUpsertListener)
+	OnPresence(PresenceUpdateListener)
 	ReadBodyAsync(rawBody io.ReadCloser) error
 }
 
 func (s *listener) OnMessage(message MessageUpsertListener) {
 	s.messageUpsertListener = &message
+}
+
+func (s *listener) OnPresence(presence PresenceUpdateListener) {
+	s.presenceUpdateListener = &presence
 }
