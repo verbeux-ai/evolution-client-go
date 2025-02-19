@@ -6,15 +6,15 @@ import (
 	"github.com/verbeux-ai/evolution-client-go"
 )
 
-type wookType string
+type WookType string
 
 const (
-	wookTypeMessageUpsert  wookType = "messages.upsert"
-	wookTypePresenceUpdate wookType = "presence.update"
+	WookTypeMessageUpsert  WookType = "messages.upsert"
+	WookTypePresenceUpdate WookType = "presence.update"
 )
 
-type wookIdentifier struct {
-	Event wookType `json:"event"`
+type WookIdentifier struct {
+	Event WookType `json:"event"`
 }
 
 type MessageUpsertListener func(message *MessageUpsert) error
