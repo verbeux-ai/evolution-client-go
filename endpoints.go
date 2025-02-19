@@ -13,6 +13,7 @@ const (
 	readMessagesEndpoint = "chat/markMessageAsRead/%s" // POST
 	findMessagesEndpoint = "chat/findMessages/%s"      // POST
 	unreadChatEndpoint   = "chat/markChatUnread/%s"    // POST
+	sendPresenceEndpoint = "chat/sendPresence/%s"      // POST
 
 	sendMessageTextEndpoint  = "message/sendText/%s"  // POST
 	sendMessageMediaEndpoint = "message/sendMedia/%s" // POST
