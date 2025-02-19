@@ -13,15 +13,15 @@ func (s *listener) ReadBodyAsync(rawBody io.ReadCloser) error {
 		return err
 	}
 
-	var identifier wookIdentifier
+	var identifier WookIdentifier
 	if err := json.Unmarshal(rawData, &identifier); err != nil {
 		return err
 	}
 
 	switch identifier.Event {
-	case wookTypeMessageUpsert:
+	case WookTypeMessageUpsert:
 		return s.handleMessageUpsert(rawData)
-	case wookTypePresenceUpdate:
+	case WookTypePresenceUpdate:
 		return s.handlePresenceUpdate(rawData)
 	}
 
