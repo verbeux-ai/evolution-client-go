@@ -15,8 +15,9 @@ const (
 	unreadChatEndpoint   = "chat/markChatUnread/%s"    // POST
 	sendPresenceEndpoint = "chat/sendPresence/%s"      // POST
 
-	sendMessageTextEndpoint  = "message/sendText/%s"  // POST
-	sendMessageMediaEndpoint = "message/sendMedia/%s" // POST
+	sendMessageTextEndpoint  = "message/sendText/%s"          // POST
+	sendMessageMediaEndpoint = "message/sendMedia/%s"         // POST
+	sendMessageAudioEndpoint = "message/sendWhatsAppAudio/%s" // POST
 
 	findLabelsEndpoint  = "label/findLabels/%s"  //GET
 	handleLabelEndpoint = "label/handleLabel/%s" // POST

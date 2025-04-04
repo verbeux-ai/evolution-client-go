@@ -178,3 +178,45 @@ func (s *Client) SendMediaMessage(ctx context.Context, instanceName string, req 
 
 	return &toReturn, nil
 }
+
+type AudioMessageRequest struct {
+	Number           string                `json:"number,omitempty"`
+	Audio            string                `json:"audio,omitempty"`
+	Delay            int                   `json:"delay,omitempty"`
+	Quoted           *MessageRequestQuoted `json:"quoted,omitempty"`
+	MentionsEveryOne bool                  `json:"mentionsEveryOne,omitempty"`
+	Mentioned        []string              `json:"mentioned,omitempty"`
+	Encoding         bool                  `json:"encoding,omitempty"`
+}
+
+type AudioMessageResponse interface{}
+
+func (s *Client) SendAudioMessage(ctx context.Context, instanceName string, req *AudioMessageRequest) (*AudioMessageResponse, error) {
+	url := fmt.Sprintf(sendMessageAudioEndpoint, instanceName)
+	if req == nil {
+		return nil, fmt.Errorf("missing request object")
+	}
+
+	resp, err := s.request(ctx, req, http.MethodPost, url)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	if resp.StatusCode > 399 {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		bodyErr := errors.New(string(body))
+		return nil, fmt.Errorf("failed to send text message with code %d: %w", resp.StatusCode, bodyErr)
+	}
+
+	var toReturn AudioMessageResponse
+	if err = json.NewDecoder(resp.Body).Decode(&toReturn); err != nil {
+		return nil, err
+	}
+
+	return &toReturn, nil
+}

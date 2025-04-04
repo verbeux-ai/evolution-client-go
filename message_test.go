@@ -18,3 +18,13 @@ func TestSendTextMessage(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }
+
+func TestSendAudioMessage(t *testing.T) {
+	ctx := context.Background()
+	result, err := client.SendAudioMessage(ctx, os.Getenv("INSTANCE_NAME"), &evolution.AudioMessageRequest{
+		Number: os.Getenv("NUMBER"),
+		Audio:  "",
+	})
+	require.NoError(t, err)
+	require.NotEmpty(t, result)
+}
