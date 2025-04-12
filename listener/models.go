@@ -103,7 +103,14 @@ type MessageUpsertDataMessage struct {
 	Base64             string                                     `json:"base64"`
 	ImageMessage       MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
 	AudioMessage       MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
+	ReactionMessage    ReactionMessage                            `json:"reactionMessage"`
 	MessageContextInfo MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
+}
+
+type ReactionMessage struct {
+	Key               MessageUpsertDataKey `json:"key"`
+	Text              string               `json:"text"`
+	SenderTimestampMs string               `json:"senderTimestampMs"`
 }
 
 type MessageUpsertDataContextInfo struct {

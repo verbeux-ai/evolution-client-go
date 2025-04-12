@@ -13,7 +13,8 @@ func TestSendTextMessage(t *testing.T) {
 	ctx := context.Background()
 	result, err := client.SendTextMessage(ctx, os.Getenv("INSTANCE_NAME"), &evolution.TextMessageRequest{
 		Number: os.Getenv("NUMBER"),
-		Text:   "Fala Dotô!",
+		Text:   "Teste",
+		Delay:  5,
 	})
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
