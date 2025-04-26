@@ -189,7 +189,35 @@ type AudioMessageRequest struct {
 	Encoding         bool                  `json:"encoding,omitempty"`
 }
 
-type AudioMessageResponse interface{}
+type AudioMessageResponseMessage struct {
+	AudioMessage AudioMessageResponseMessageAudio `json:"audioMessage"`
+	Base64       string                           `json:"base64"`
+}
+type AudioMessageResponseMessageAudio struct {
+	DirectPath        string `json:"directPath"`
+	FileEncSha256     string `json:"fileEncSha256"`
+	FileLength        string `json:"fileLength"`
+	FileSha256        string `json:"fileSha256"`
+	MediaKey          string `json:"mediaKey"`
+	MediaKeyTimestamp string `json:"mediaKeyTimestamp"`
+	Mimetype          string `json:"mimetype"`
+	Ptt               bool   `json:"ptt"`
+	Seconds           int    `json:"seconds"`
+	Url               string `json:"url"`
+	Waveform          string `json:"waveform"`
+}
+
+type AudioMessageResponse struct {
+	ContextInfo      MessageContextInfo          `json:"contextInfo"`
+	InstanceId       string                      `json:"instanceId"`
+	Key              TextMessageResponseKey      `json:"key"`
+	Message          AudioMessageResponseMessage `json:"message"`
+	MessageTimestamp int                         `json:"messageTimestamp"`
+	MessageType      string                      `json:"messageType"`
+	PushName         string                      `json:"pushName"`
+	Source           string                      `json:"source"`
+	Status           string                      `json:"status"`
+}
 
 func (s *Client) SendAudioMessage(ctx context.Context, instanceName string, req *AudioMessageRequest) (*AudioMessageResponse, error) {
 	url := fmt.Sprintf(sendMessageAudioEndpoint, instanceName)
