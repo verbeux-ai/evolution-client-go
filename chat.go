@@ -291,7 +291,9 @@ type existsRequest struct {
 	Numbers []string `json:"numbers"`
 }
 
-type ExistsResponse []Exists
+type ExistsResponse map[string]Exists
+
+type existsResponseInternal []Exists
 
 type Exists struct {
 	Exists bool   `json:"exists"`
@@ -299,7 +301,7 @@ type Exists struct {
 	Number string `json:"number"`
 }
 
-func (s *Client) Exists(ctx context.Context, instanceName string, numbers []string) (*ExistsResponse, error) {
+func (s *Client) Exists(ctx context.Context, instanceName string, numbers []string) (ExistsResponse, error) {
 	req := existsRequest{
 		numbers,
 	}
@@ -325,10 +327,15 @@ func (s *Client) Exists(ctx context.Context, instanceName string, numbers []stri
 		return nil, err
 	}
 
-	var toReturn ExistsResponse
-	if err = json.Unmarshal(body, &toReturn); err != nil {
+	var result existsResponseInternal
+	if err = json.Unmarshal(body, &result); err != nil {
 		return nil, fmt.Errorf("%w: %s", err, string(body))
 	}
 
-	return &toReturn, nil
+	toReturn := make(map[string]Exists)
+	for _, exists := range result {
+		toReturn[exists.Number] = exists
+	}
+
+	return toReturn, nil
 }
