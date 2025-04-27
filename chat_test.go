@@ -56,3 +56,12 @@ func TestMarkUnread(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, resultUnread)
 }
+
+func TestExists(t *testing.T) {
+	ctx := context.Background()
+
+	numbers := []string{""}
+	result, err := client.Exists(ctx, os.Getenv("INSTANCE_NAME"), numbers)
+	require.NoError(t, err)
+	require.NotEmpty(t, result)
+}
