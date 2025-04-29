@@ -102,9 +102,26 @@ type MessageUpsertDataMessage struct {
 	Conversation       string                                     `json:"conversation"`
 	Base64             string                                     `json:"base64"`
 	ImageMessage       MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
+	DocumentMessage    MessageUpsertDataMessageDocumentMessage    `json:"documentMessage"`
 	AudioMessage       MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
 	ReactionMessage    ReactionMessage                            `json:"reactionMessage"`
 	MessageContextInfo MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
+}
+
+type MessageUpsertDataMessageDocumentMessage struct {
+	Url               string `json:"url"`
+	Mimetype          string `json:"mimetype"`
+	Title             string `json:"title"`
+	FileSha256        string `json:"fileSha256"`
+	FileLength        string `json:"fileLength"`
+	PageCount         int    `json:"pageCount"`
+	MediaKey          string `json:"mediaKey"`
+	FileName          string `json:"fileName"`
+	FileEncSha256     string `json:"fileEncSha256"`
+	DirectPath        string `json:"directPath"`
+	MediaKeyTimestamp string `json:"mediaKeyTimestamp"`
+	ContactVcard      bool   `json:"contactVcard"`
+	JpegThumbnail     string `json:"jpegThumbnail"`
 }
 
 type ReactionMessage struct {
