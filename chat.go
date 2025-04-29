@@ -286,3 +286,56 @@ func (s *Client) UnreadChat(ctx context.Context, instanceName string, req *Unrea
 
 	return &toReturn, nil
 }
+
+type existsRequest struct {
+	Numbers []string `json:"numbers"`
+}
+
+type ExistsResponse map[string]Exists
+
+type existsResponseInternal []Exists
+
+type Exists struct {
+	Exists bool   `json:"exists"`
+	Jid    string `json:"jid"`
+	Number string `json:"number"`
+}
+
+func (s *Client) Exists(ctx context.Context, instanceName string, numbers []string) (ExistsResponse, error) {
+	req := existsRequest{
+		numbers,
+	}
+
+	resp, err := s.request(ctx, req, http.MethodPost, fmt.Sprintf(existsEndpoint, instanceName))
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode > 399 {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		bodyErr := errors.New(string(body))
+		return nil, fmt.Errorf("failed to check exists with code %d: %w", resp.StatusCode, bodyErr)
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var result existsResponseInternal
+	if err = json.Unmarshal(body, &result); err != nil {
+		return nil, fmt.Errorf("%w: %s", err, string(body))
+	}
+
+	toReturn := make(map[string]Exists)
+	for _, exists := range result {
+		toReturn[exists.Number] = exists
+	}
+
+	return toReturn, nil
+}

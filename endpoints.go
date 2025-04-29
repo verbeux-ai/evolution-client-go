@@ -14,6 +14,7 @@ const (
 	findMessagesEndpoint = "chat/findMessages/%s"      // POST
 	unreadChatEndpoint   = "chat/markChatUnread/%s"    // POST
 	sendPresenceEndpoint = "chat/sendPresence/%s"      // POST
+	existsEndpoint       = "chat/whatsappNumbers/%s"   // POST
 
 	sendMessageTextEndpoint  = "message/sendText/%s"          // POST
 	sendMessageMediaEndpoint = "message/sendMedia/%s"         // POST

@@ -74,9 +74,11 @@ if err := whatsappListener.ReadBodyAsync(ctx.Request().Body); err != nil {
 | Fetch Instances           | Sim          |
 | Send Text Message         | Sim          |
 | Send Media Message        | Sim          |
+| Send Audio Message        | Sim          |
 | Get Tags                  | Sim          |
 | Add Chat Tag              | Sim          |
 | Find Messages             | Sim          |
 | Unread Messages           | Sim          |
+| Exists                    | Sim          |
 
 > Você está convidado a contribuir ao repositório!
