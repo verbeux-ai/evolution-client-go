@@ -33,7 +33,7 @@ type QuotedMessage struct {
 }
 
 type TextMessageResponse struct {
-	Key              TextMessageResponseKey         `json:"key"`
+	Key              MessageResponseKey             `json:"key"`
 	PushName         string                         `json:"pushName"`
 	Status           string                         `json:"status"`
 	Message          TextMessageResponseMessage     `json:"message"`
@@ -44,7 +44,7 @@ type TextMessageResponse struct {
 	Source           string                         `json:"source"`
 }
 
-type TextMessageResponseKey struct {
+type MessageResponseKey struct {
 	RemoteJid string `json:"remoteJid,omitempty"`
 	FromMe    bool   `json:"fromMe,omitempty"`
 	Id        string `json:"id,omitempty"`
@@ -110,7 +110,7 @@ type MediaMessageRequest struct {
 }
 
 type MediaMessageResponse struct {
-	Key              MediaMessageResponseKey     `json:"key,omitempty"`
+	Key              MessageResponseKey          `json:"key,omitempty"`
 	PushName         string                      `json:"pushName,omitempty"`
 	Status           string                      `json:"status,omitempty"`
 	Message          MediaMessageResponseMessage `json:"message,omitempty"`
@@ -119,12 +119,6 @@ type MediaMessageResponse struct {
 	MessageTimestamp int                         `json:"messageTimestamp,omitempty"`
 	InstanceId       string                      `json:"instanceId,omitempty"`
 	Source           string                      `json:"source,omitempty"`
-}
-
-type MediaMessageResponseKey struct {
-	RemoteJid string `json:"remoteJid,omitempty"`
-	FromMe    bool   `json:"fromMe,omitempty"`
-	Id        string `json:"id,omitempty"`
 }
 
 type MediaMessageResponseMessage struct {
@@ -210,7 +204,7 @@ type AudioMessageResponseMessageAudio struct {
 type AudioMessageResponse struct {
 	ContextInfo      MessageContextInfo          `json:"contextInfo"`
 	InstanceId       string                      `json:"instanceId"`
-	Key              TextMessageResponseKey      `json:"key"`
+	Key              MessageResponseKey          `json:"key"`
 	Message          AudioMessageResponseMessage `json:"message"`
 	MessageTimestamp int                         `json:"messageTimestamp"`
 	MessageType      string                      `json:"messageType"`
