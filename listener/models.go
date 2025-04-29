@@ -122,6 +122,7 @@ type MessageUpsertDataMessageDocumentMessage struct {
 	MediaKeyTimestamp string `json:"mediaKeyTimestamp"`
 	ContactVcard      bool   `json:"contactVcard"`
 	JpegThumbnail     string `json:"jpegThumbnail"`
+	Caption           string `json:"caption"`
 }
 
 type ReactionMessage struct {
