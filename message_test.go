@@ -38,10 +38,10 @@ func TestSendListMessage(t *testing.T) {
 		Description: "Descricao",
 		ButtonText:  "Botao text",
 		FooterText:  "Footer text",
-		Sections: []evolution.ListMessageRequestSection{
+		Sections: []evolution.ListMessageSection{
 			{
 				Title: "teste title",
-				Rows: []evolution.ListMessageRequestSectionRow{
+				Rows: []evolution.ListMessageSectionRow{
 					{
 						Title:       "teste row title",
 						Description: "teste row description",
