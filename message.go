@@ -244,30 +244,54 @@ func (s *Client) SendAudioMessage(ctx context.Context, instanceName string, req 
 }
 
 type ListMessageRequest struct {
-	Number           string                      `json:"number"`
-	Title            string                      `json:"title"`
-	Description      string                      `json:"description"`
-	ButtonText       string                      `json:"buttonText"`
-	FooterText       string                      `json:"footerText"`
-	Sections         []ListMessageRequestSection `json:"sections"`
-	Delay            *int                        `json:"delay,omitempty"`
-	Quoted           *MessageRequestQuoted       `json:"quoted,omitempty"`
-	MentionsEveryone bool                        `json:"mentionsEveryOne,omitempty"`
-	Mentioned        []string                    `json:"mentioned,omitempty"`
+	Number           string                `json:"number"`
+	Title            string                `json:"title"`
+	Description      string                `json:"description"`
+	ButtonText       string                `json:"buttonText"`
+	FooterText       string                `json:"footerText"`
+	Sections         []ListMessageSection  `json:"sections"`
+	Delay            *int                  `json:"delay,omitempty"`
+	Quoted           *MessageRequestQuoted `json:"quoted,omitempty"`
+	MentionsEveryone bool                  `json:"mentionsEveryOne,omitempty"`
+	Mentioned        []string              `json:"mentioned,omitempty"`
 }
 
-type ListMessageRequestSection struct {
-	Title string                         `json:"title"`
-	Rows  []ListMessageRequestSectionRow `json:"rows"`
+type ListMessageSection struct {
+	Title string                  `json:"title"`
+	Rows  []ListMessageSectionRow `json:"rows"`
 }
 
-type ListMessageRequestSectionRow struct {
+type ListMessageSectionRow struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	RowID       string `json:"rowId"`
 }
 
-type ListMessageResponse interface{}
+type ListMessageResponse struct {
+	ContextInfo      MessageContextInfo         `json:"contextInfo"`
+	InstanceId       string                     `json:"instanceId"`
+	Key              MessageResponseKey         `json:"key"`
+	Message          ListMessageResponseMessage `json:"message"`
+	MessageTimestamp int                        `json:"messageTimestamp"`
+	MessageType      string                     `json:"messageType"`
+	PushName         string                     `json:"pushName"`
+	Source           string                     `json:"source"`
+	Status           string                     `json:"status"`
+}
+
+type ListMessageResponseMessage struct {
+	ListMessage ListMessageResponseMessageListMessage
+}
+
+type ListMessageResponseMessageListMessage struct {
+	ButtonText  string               `json:"buttonText"`
+	ContextInfo interface{}          `json:"contextInfo"`
+	Description string               `json:"description"`
+	FooterText  string               `json:"footerText"`
+	ListType    string               `json:"listType"`
+	Sections    []ListMessageSection `json:"sections"`
+	Title       string               `json:"title"`
+}
 
 func (s *Client) SendListMessage(ctx context.Context, instanceName string, req *ListMessageRequest) (*ListMessageResponse, error) {
 	url := fmt.Sprintf(sendMessageListEndpoint, instanceName)
