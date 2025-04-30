@@ -19,6 +19,7 @@ const (
 	sendMessageTextEndpoint  = "message/sendText/%s"          // POST
 	sendMessageMediaEndpoint = "message/sendMedia/%s"         // POST
 	sendMessageAudioEndpoint = "message/sendWhatsAppAudio/%s" // POST
+	sendMessageListEndpoint  = "message/sendList/%s"          // POST
 
 	findLabelsEndpoint  = "label/findLabels/%s"  //GET
 	handleLabelEndpoint = "label/handleLabel/%s" // POST

@@ -242,3 +242,59 @@ func (s *Client) SendAudioMessage(ctx context.Context, instanceName string, req 
 
 	return &toReturn, nil
 }
+
+type ListMessageRequest struct {
+	Number           string                      `json:"number"`
+	Title            string                      `json:"title"`
+	Description      string                      `json:"description"`
+	ButtonText       string                      `json:"buttonText"`
+	FooterText       string                      `json:"footerText"`
+	Sections         []ListMessageRequestSection `json:"sections"`
+	Delay            *int                        `json:"delay,omitempty"`
+	Quoted           *MessageRequestQuoted       `json:"quoted,omitempty"`
+	MentionsEveryone bool                        `json:"mentionsEveryOne,omitempty"`
+	Mentioned        []string                    `json:"mentioned,omitempty"`
+}
+
+type ListMessageRequestSection struct {
+	Title string                         `json:"title"`
+	Rows  []ListMessageRequestSectionRow `json:"rows"`
+}
+
+type ListMessageRequestSectionRow struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	RowID       string `json:"rowId"`
+}
+
+type ListMessageResponse interface{}
+
+func (s *Client) SendListMessage(ctx context.Context, instanceName string, req *ListMessageRequest) (*ListMessageResponse, error) {
+	url := fmt.Sprintf(sendMessageListEndpoint, instanceName)
+	if req == nil {
+		return nil, fmt.Errorf("missing request object")
+	}
+
+	resp, err := s.request(ctx, req, http.MethodPost, url)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	if resp.StatusCode > 399 {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		bodyErr := errors.New(string(body))
+		return nil, fmt.Errorf("failed to send text message with code %d: %w", resp.StatusCode, bodyErr)
+	}
+
+	var toReturn ListMessageResponse
+	if err = json.NewDecoder(resp.Body).Decode(&toReturn); err != nil {
+		return nil, err
+	}
+
+	return &toReturn, nil
+}
