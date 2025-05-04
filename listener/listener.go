@@ -9,6 +9,7 @@ type listener struct {
 
 	messageUpsertListener  *MessageUpsertListener
 	presenceUpdateListener *PresenceUpdateListener
+	messageUpdateListener  *MessageUpdateListener
 }
 
 func NewMessageListener() MessageListener {
@@ -40,6 +41,7 @@ type MessageListener interface {
 	HandleErrors(f func(error)) (closer func())
 	OnMessage(MessageUpsertListener)
 	OnPresence(PresenceUpdateListener)
+	OnMessageUpdate(MessageUpdateListener)
 	ReadBodyAsync(rawBody io.ReadCloser) error
 }
 
@@ -49,4 +51,8 @@ func (s *listener) OnMessage(message MessageUpsertListener) {
 
 func (s *listener) OnPresence(presence PresenceUpdateListener) {
 	s.presenceUpdateListener = &presence
+}
+
+func (s *listener) OnMessageUpdate(message MessageUpdateListener) {
+	s.messageUpdateListener = &message
 }
