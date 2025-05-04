@@ -11,6 +11,7 @@ type WookType string
 const (
 	WookTypeMessageUpsert  WookType = "messages.upsert"
 	WookTypePresenceUpdate WookType = "presence.update"
+	WookTypeMessageUpdate  WookType = "messages.update"
 )
 
 type WookIdentifier struct {
@@ -203,4 +204,33 @@ type PresenceUpdateData struct {
 
 type PresenceUpdateDataPresencesSWhatsappNet struct {
 	LastKnownPresence evolution.SendPresenceRequestPresence `json:"lastKnownPresence"`
+}
+
+type MessageUpdateListener func(data *MessageUpdate) error
+
+type MessageUpdate struct {
+	Event       string            `json:"event"`
+	Instance    string            `json:"instance"`
+	Data        MessageUpdateData `json:"data"`
+	Destination string            `json:"destination"`
+	DateTime    time.Time         `json:"date_time"`
+	Sender      string            `json:"sender"`
+	ServerUrl   string            `json:"server_url"`
+}
+
+type MessageUpdateDataStatus string
+
+const (
+	MessageStatusDeliveryAck MessageUpdateDataStatus = "DELIVERY_ACK"
+	MessageStatusRead        MessageUpdateDataStatus = "READ"
+)
+
+type MessageUpdateData struct {
+	MessageId   string                  `json:"messageId"`
+	KeyId       string                  `json:"keyId"`
+	RemoteJid   string                  `json:"remoteJid"`
+	FromMe      bool                    `json:"fromMe"`
+	Participant string                  `json:"participant"`
+	Status      MessageUpdateDataStatus `json:"status"`
+	InstanceId  string                  `json:"instanceId"`
 }
