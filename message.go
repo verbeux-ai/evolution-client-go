@@ -250,7 +250,7 @@ type ListMessageRequest struct {
 	ButtonText       string                `json:"buttonText"`
 	FooterText       string                `json:"footerText"`
 	Sections         []ListMessageSection  `json:"sections"`
-	Delay            *int                  `json:"delay,omitempty"`
+	Delay            int                   `json:"delay,omitempty"`
 	Quoted           *MessageRequestQuoted `json:"quoted,omitempty"`
 	MentionsEveryone bool                  `json:"mentionsEveryOne,omitempty"`
 	Mentioned        []string              `json:"mentioned,omitempty"`
