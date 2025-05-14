@@ -183,6 +183,26 @@ type MessageUpsertDataContextInfoQuotedMessage struct {
 			} `json:"disappearingMode"`
 		} `json:"contextInfo"`
 	} `json:"extendedTextMessage"`
+	ListMessage *MessageUpsertDataContextInfoQuotedMessageList `json:"listMessage"`
+}
+
+type MessageUpsertDataContextInfoQuotedMessageList struct {
+	Title       string                                                 `json:"title"`
+	Description string                                                 `json:"description"`
+	ButtonText  string                                                 `json:"buttonText"`
+	ListType    string                                                 `json:"listType"`
+	Sections    []MessageUpsertDataContextInfoQuotedMessageListSection `json:"sections"`
+	FooterText  string                                                 `json:"footerText"`
+}
+type MessageUpsertDataContextInfoQuotedMessageListSection struct {
+	Title string                                                    `json:"title"`
+	Rows  []MessageUpsertDataContextInfoQuotedMessageListSectionRow `json:"rows"`
+}
+
+type MessageUpsertDataContextInfoQuotedMessageListSectionRow struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	RowId       string `json:"rowId"`
 }
 
 type PresenceUpdateListener func(data *PresenceUpdate) error
