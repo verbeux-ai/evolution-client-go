@@ -100,13 +100,57 @@ type MessageUpsertDataKey struct {
 }
 
 type MessageUpsertDataMessage struct {
-	Conversation       string                                     `json:"conversation"`
-	Base64             string                                     `json:"base64"`
-	ImageMessage       MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
-	DocumentMessage    MessageUpsertDataMessageDocumentMessage    `json:"documentMessage"`
-	AudioMessage       MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
-	ReactionMessage    ReactionMessage                            `json:"reactionMessage"`
-	MessageContextInfo MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
+	Conversation        string                                     `json:"conversation"`
+	Base64              string                                     `json:"base64"`
+	ImageMessage        MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
+	DocumentMessage     MessageUpsertDataMessageDocumentMessage    `json:"documentMessage"`
+	AudioMessage        MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
+	ReactionMessage     ReactionMessage                            `json:"reactionMessage"`
+	MessageContextInfo  MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
+	ListResponseMessage MessageUpsertDataMessageListMessage        `json:"listResponseMessage"`
+}
+
+type MessageUpsertDataMessageListMessage struct {
+	Title             string                                        `json:"title"`
+	ListType          string                                        `json:"listType"`
+	SingleSelectReply MessageUpsertDataMessageListSingleSelectReply `json:"singleSelectReply"`
+	ContextInfo       MessageUpsertDataMessageListContextInfo       `json:"contextInfo"`
+	Description       string                                        `json:"description"`
+}
+
+type MessageUpsertDataMessageListSingleSelectReply struct {
+	SelectedRowId string `json:"selectedRowId"`
+}
+
+type MessageUpsertDataMessageListContextInfo struct {
+	StanzaId      string                                               `json:"stanzaId"`
+	Participant   string                                               `json:"participant"`
+	QuotedMessage MessageUpsertDataMessageListContextInfoQuotedMessage `json:"quotedMessage"`
+}
+
+type MessageUpsertDataMessageListContextInfoQuotedMessage struct {
+	MessageContextInfo struct{}                                      `json:"messageContextInfo"`
+	ListMessage        MessageUpsertDataMessageListQuotedMessageList `json:"listMessage"`
+}
+
+type MessageUpsertDataMessageListQuotedMessageList struct {
+	Title       string                                      `json:"title"`
+	Description string                                      `json:"description"`
+	ButtonText  string                                      `json:"buttonText"`
+	ListType    string                                      `json:"listType"`
+	Sections    []MessageUpsertDataMessageListQuotedSection `json:"sections"`
+	FooterText  string                                      `json:"footerText"`
+}
+
+type MessageUpsertDataMessageListQuotedSection struct {
+	Title string                                         `json:"title"`
+	Rows  []MessageUpsertDataMessageListQuotedSectionRow `json:"rows"`
+}
+
+type MessageUpsertDataMessageListQuotedSectionRow struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	RowId       string `json:"rowId"`
 }
 
 type MessageUpsertDataMessageDocumentMessage struct {
