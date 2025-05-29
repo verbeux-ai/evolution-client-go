@@ -12,6 +12,8 @@ const (
 	WookTypeMessageUpsert  WookType = "messages.upsert"
 	WookTypePresenceUpdate WookType = "presence.update"
 	WookTypeMessageUpdate  WookType = "messages.update"
+	WookTypeContactUpdate  WookType = "contacts.update"
+	WookTypeContactUpsert  WookType = "contacts.upsert"
 )
 
 type WookIdentifier struct {
@@ -298,3 +300,13 @@ type MessageUpdateData struct {
 	Status      MessageUpdateDataStatus `json:"status"`
 	InstanceId  string                  `json:"instanceId"`
 }
+
+type Contact struct {
+	RemoteJid     string `json:"remoteJid"`
+	PushName      string `json:"pushName"`
+	ProfilePicUrl string `json:"profilePicUrl"`
+	InstanceId    string `json:"instanceId"`
+}
+
+type ContactUpdateListener func(contact *Contact) error
+type ContactUpsertListener func(contact *Contact) error
