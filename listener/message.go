@@ -25,6 +25,10 @@ func (s *listener) ReadBodyAsync(rawBody io.ReadCloser) error {
 		return s.handlePresenceUpdate(rawData)
 	case WookTypeMessageUpdate:
 		return s.handleMessageUpdate(rawData)
+	case WookTypeContactUpdate:
+		return s.handleContactUpdate(rawData)
+	case WookTypeContactUpsert:
+		return s.handleContactUpsert(rawData)
 	}
 
 	return nil
@@ -58,6 +62,30 @@ func (s *listener) handlePresenceUpdate(rawData []byte) error {
 		return err
 	}
 	if err := (*s.presenceUpdateListener)(&presence); err != nil {
+		s.chError <- err
+	}
+	return nil
+}
+
+func (s *listener) handleContactUpdate(rawData []byte) error {
+	var rawContacts ContactUpdateUpsert
+	if err := json.Unmarshal(rawData, &rawContacts); err != nil {
+		return err
+	}
+
+	if err := (*s.contactUpdateListener)(rawContacts.Data); err != nil {
+		s.chError <- err
+	}
+	return nil
+}
+
+func (s *listener) handleContactUpsert(rawData []byte) error {
+	var rawContacts ContactUpdateUpsert
+	if err := json.Unmarshal(rawData, &rawContacts); err != nil {
+		return err
+	}
+
+	if err := (*s.contactUpsertListener)(rawContacts.Data); err != nil {
 		s.chError <- err
 	}
 	return nil

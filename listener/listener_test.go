@@ -11,7 +11,7 @@ import (
 )
 
 func TestListener_OnMessage(t *testing.T) {
-	client := listener.NewMessageListener()
+	client := listener.NewEventListener()
 
 	wg := sync.WaitGroup{}
 	wg.Add(1)
@@ -30,7 +30,7 @@ func TestListener_OnMessage(t *testing.T) {
 }
 
 func TestListener_OnImageMessage(t *testing.T) {
-	client := listener.NewMessageListener()
+	client := listener.NewEventListener()
 
 	wg := sync.WaitGroup{}
 	wg.Add(1)
@@ -49,7 +49,7 @@ func TestListener_OnImageMessage(t *testing.T) {
 }
 
 func TestListener_OnAudioMessage(t *testing.T) {
-	client := listener.NewMessageListener()
+	client := listener.NewEventListener()
 
 	wg := sync.WaitGroup{}
 	wg.Add(1)
@@ -68,7 +68,7 @@ func TestListener_OnAudioMessage(t *testing.T) {
 }
 
 func TestListener_OnListMessage(t *testing.T) {
-	client := listener.NewMessageListener()
+	client := listener.NewEventListener()
 
 	wg := sync.WaitGroup{}
 	wg.Add(1)
@@ -90,4 +90,27 @@ func TestListener_OnListMessage(t *testing.T) {
 
 	wg.Wait()
 
+}
+
+func TestListener_OnContactUpsert(t *testing.T) {
+	client := listener.NewEventListener()
+
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+
+	client.OnContactUpsert(func(contacts []listener.Contact) error {
+		defer wg.Done()
+		require.NotEmpty(t, contacts)
+		require.Len(t, contacts, 1)
+		require.NotEmpty(t, contacts[0].RemoteJid)
+		require.NotEmpty(t, contacts[0].PushName)
+		require.Nil(t, contacts[0].ProfilePicUrl)
+		require.NotEmpty(t, contacts[0].InstanceId)
+		return nil
+	})
+
+	err := client.ReadBodyAsync(io.NopCloser(strings.NewReader(contactUpsertExample1)))
+	require.NoError(t, err)
+
+	wg.Wait()
 }
