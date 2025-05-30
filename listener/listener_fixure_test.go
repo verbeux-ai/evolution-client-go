@@ -108,3 +108,4 @@ const messageListExample1 = `{
   "server_url": "http://localhost:80",
   "apikey": null
 }`
+const contactUpsertExample1 = `{"event":"contacts.upsert","instance":"fdf3b942-1eaf-45e3-871a-0ab2c0e182b6","data":[{"remoteJid":"558586541111@s.whatsapp.net","pushName":"Beyonce Do Front end","profilePicUrl":null,"instanceId":"c44a02ad-1ba5-4177-8c57-0d359c6a9f32"}],"destination":"https://evolution-integration-592799294413.us-central1.run.app/webhook/fdf3b942-1eaf-45e3-871a-0ab2c0e182b6","date_time":"2025-05-30T16:13:20.288Z","sender":"558594138387@s.whatsapp.net","server_url":"http://localhost:80","apikey":null}`

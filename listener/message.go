@@ -68,24 +68,24 @@ func (s *listener) handlePresenceUpdate(rawData []byte) error {
 }
 
 func (s *listener) handleContactUpdate(rawData []byte) error {
-	var contact Contact
-	if err := json.Unmarshal(rawData, &contact); err != nil {
+	var rawContacts ContactUpdateUpsert
+	if err := json.Unmarshal(rawData, &rawContacts); err != nil {
 		return err
 	}
 
-	if err := (*s.contactUpdateListener)(&contact); err != nil {
+	if err := (*s.contactUpdateListener)(rawContacts.Data); err != nil {
 		s.chError <- err
 	}
 	return nil
 }
 
 func (s *listener) handleContactUpsert(rawData []byte) error {
-	var contact Contact
-	if err := json.Unmarshal(rawData, &contact); err != nil {
+	var rawContacts ContactUpdateUpsert
+	if err := json.Unmarshal(rawData, &rawContacts); err != nil {
 		return err
 	}
 
-	if err := (*s.contactUpsertListener)(&contact); err != nil {
+	if err := (*s.contactUpsertListener)(rawContacts.Data); err != nil {
 		s.chError <- err
 	}
 	return nil

@@ -302,11 +302,21 @@ type MessageUpdateData struct {
 }
 
 type Contact struct {
-	RemoteJid     string `json:"remoteJid"`
-	PushName      string `json:"pushName"`
-	ProfilePicUrl string `json:"profilePicUrl"`
-	InstanceId    string `json:"instanceId"`
+	RemoteJid     string      `json:"remoteJid"`
+	PushName      string      `json:"pushName"`
+	ProfilePicUrl interface{} `json:"profilePicUrl"`
+	InstanceId    string      `json:"instanceId"`
 }
 
-type ContactUpdateListener func(contact *Contact) error
-type ContactUpsertListener func(contact *Contact) error
+type ContactUpdateUpsert struct {
+	Event       string    `json:"event"`
+	Instance    string    `json:"instance"`
+	Data        []Contact `json:"data"`
+	Destination string    `json:"destination"`
+	DateTime    time.Time `json:"date_time"`
+	Sender      string    `json:"sender"`
+	ServerUrl   string    `json:"server_url"`
+}
+
+type ContactUpdateListener func(contacts []Contact) error
+type ContactUpsertListener func(contacts []Contact) error

@@ -14,7 +14,7 @@ type listener struct {
 	contactUpsertListener  *ContactUpsertListener
 }
 
-func NewMessageListener() MessageListener {
+func NewEventListener() EventListener {
 	return &listener{
 		chError: make(chan error),
 	}
@@ -39,7 +39,7 @@ func (s *listener) HandleErrors(f func(error)) (closer func()) {
 	}
 }
 
-type MessageListener interface {
+type EventListener interface {
 	HandleErrors(f func(error)) (closer func())
 	OnMessage(MessageUpsertListener)
 	OnPresence(PresenceUpdateListener)
