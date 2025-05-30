@@ -302,10 +302,10 @@ type MessageUpdateData struct {
 }
 
 type Contact struct {
-	RemoteJid     string      `json:"remoteJid"`
-	PushName      string      `json:"pushName"`
-	ProfilePicUrl interface{} `json:"profilePicUrl"`
-	InstanceId    string      `json:"instanceId"`
+	RemoteJid     string `json:"remoteJid"`
+	PushName      string `json:"pushName"`
+	ProfilePicUrl string `json:"profilePicUrl"`
+	InstanceId    string `json:"instanceId"`
 }
 
 type ContactUpdateUpsert struct {
