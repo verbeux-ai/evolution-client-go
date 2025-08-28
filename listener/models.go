@@ -111,14 +111,18 @@ type MessageUpsertDataMessage struct {
 	ReactionMessage     ReactionMessage                            `json:"reactionMessage"`
 	MessageContextInfo  MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
 	ListResponseMessage MessageUpsertDataMessageListMessage        `json:"listResponseMessage"`
+	ExtendedMessage     *MessageUpsertExtendedTextMessage          `json:"extendedMessage"`
 }
 
 type MessageUpsertDataMessageListMessage struct {
-	Title             string                                        `json:"title"`
-	ListType          string                                        `json:"listType"`
-	SingleSelectReply MessageUpsertDataMessageListSingleSelectReply `json:"singleSelectReply"`
-	ContextInfo       MessageUpsertDataMessageListContextInfo       `json:"contextInfo"`
-	Description       string                                        `json:"description"`
+	Title             string                                           `json:"title"`
+	ListType          string                                           `json:"listType"`
+	SingleSelectReply MessageUpsertDataMessageListSingleSelectReply    `json:"singleSelectReply"`
+	ContextInfo       MessageUpsertDataMessageListContextInfo          `json:"contextInfo"`
+	Description       string                                           `json:"description"`
+	ButtonText        string                                           `json:"buttonText"`
+	Sections          []MessageUpsertDataMessageListMessageListSection `json:"sections"`
+	FooterText        string                                           `json:"footerText"`
 }
 
 type MessageUpsertDataMessageListSingleSelectReply struct {
@@ -185,7 +189,7 @@ type MessageUpsertDataContextInfo struct {
 	StanzaId                                    string                                       `json:"stanzaId"`
 	Participant                                 string                                       `json:"participant"`
 	Expiration                                  int                                          `json:"expiration"`
-	QuotedMessage                               MessageUpsertDataContextInfoQuotedMessage    `json:"quotedMessage"`
+	QuotedMessage                               MessageUpsertDataMessage                     `json:"quotedMessage"`
 	MentionedJid                                []string                                     `json:"mentionedJid"`
 	ConversionSource                            string                                       `json:"conversionSource"`
 	ConversionData                              string                                       `json:"conversionData"`
@@ -218,35 +222,25 @@ type MessageUpsertDataContextInfoDisappearingMode struct {
 	InitiatedByMe bool   `json:"initiatedByMe"`
 }
 
-type MessageUpsertDataContextInfoQuotedMessage struct {
-	ExtendedTextMessage struct {
-		Text        string `json:"text"`
-		ContextInfo struct {
-			Expiration       int `json:"expiration"`
-			DisappearingMode struct {
-				Initiator     string `json:"initiator"`
-				Trigger       string `json:"trigger"`
-				InitiatedByMe bool   `json:"initiatedByMe"`
-			} `json:"disappearingMode"`
-		} `json:"contextInfo"`
-	} `json:"extendedTextMessage"`
-	ListMessage *MessageUpsertDataContextInfoQuotedMessageList `json:"listMessage"`
+type MessageUpsertExtendedTextMessage struct {
+	Text        string                       `json:"text"`
+	ContextInfo MessageUpsertDataContextInfo `json:"contextInfo"`
 }
 
 type MessageUpsertDataContextInfoQuotedMessageList struct {
-	Title       string                                                 `json:"title"`
-	Description string                                                 `json:"description"`
-	ButtonText  string                                                 `json:"buttonText"`
-	ListType    string                                                 `json:"listType"`
-	Sections    []MessageUpsertDataContextInfoQuotedMessageListSection `json:"sections"`
-	FooterText  string                                                 `json:"footerText"`
+	Title       string                                           `json:"title"`
+	Description string                                           `json:"description"`
+	ButtonText  string                                           `json:"buttonText"`
+	ListType    string                                           `json:"listType"`
+	Sections    []MessageUpsertDataMessageListMessageListSection `json:"sections"`
+	FooterText  string                                           `json:"footerText"`
 }
-type MessageUpsertDataContextInfoQuotedMessageListSection struct {
-	Title string                                                    `json:"title"`
-	Rows  []MessageUpsertDataContextInfoQuotedMessageListSectionRow `json:"rows"`
+type MessageUpsertDataMessageListMessageListSection struct {
+	Title string                                              `json:"title"`
+	Rows  []MessageUpsertDataMessageListMessageListSectionRow `json:"rows"`
 }
 
-type MessageUpsertDataContextInfoQuotedMessageListSectionRow struct {
+type MessageUpsertDataMessageListMessageListSectionRow struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	RowId       string `json:"rowId"`
