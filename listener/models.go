@@ -104,6 +104,7 @@ type MessageUpsertDataKey struct {
 type MessageUpsertDataMessage struct {
 	Conversation        string                                     `json:"conversation"`
 	Base64              string                                     `json:"base64"`
+	MediaURL            string                                     `json:"media_url"`
 	ImageMessage        MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
 	DocumentMessage     MessageUpsertDataMessageDocumentMessage    `json:"documentMessage"`
 	AudioMessage        MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
