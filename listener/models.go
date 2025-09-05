@@ -96,9 +96,10 @@ type MessageUpsertData struct {
 
 type MessageUpsertDataKey struct {
 	RemoteJid   string `json:"remoteJid"`
+	RemoteLid   string `json:"remoteLid"`
 	FromMe      bool   `json:"fromMe"`
 	Id          string `json:"id"`
-	Participant string `json:"participant"` // Use this field do check if is a group
+	Participant string `json:"participant"`
 }
 
 type MessageUpsertDataMessage struct {
@@ -290,6 +291,7 @@ type MessageUpdateData struct {
 	MessageId   string                  `json:"messageId"`
 	KeyId       string                  `json:"keyId"`
 	RemoteJid   string                  `json:"remoteJid"`
+	RemoteLid   string                  `json:"remoteLid"`
 	FromMe      bool                    `json:"fromMe"`
 	Participant string                  `json:"participant"`
 	Status      MessageUpdateDataStatus `json:"status"`
@@ -298,6 +300,7 @@ type MessageUpdateData struct {
 
 type Contact struct {
 	RemoteJid     string `json:"remoteJid"`
+	RemoteLid     string `json:"remoteLid"`
 	PushName      string `json:"pushName"`
 	ProfilePicUrl string `json:"profilePicUrl"`
 	InstanceId    string `json:"instanceId"`
