@@ -108,6 +108,7 @@ type MessageUpsertDataMessage struct {
 	MediaURL            string                                     `json:"mediaUrl"`
 	ImageMessage        MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
 	DocumentMessage     MessageUpsertDataMessageDocumentMessage    `json:"documentMessage"`
+	VideoMessage        MessageUpsertDataMessageVideoMessage       `json:"videoMessage"`
 	AudioMessage        MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
 	ReactionMessage     ReactionMessage                            `json:"reactionMessage"`
 	MessageContextInfo  MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
@@ -159,6 +160,19 @@ type MessageUpsertDataMessageListQuotedSectionRow struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	RowId       string `json:"rowId"`
+}
+
+type MessageUpsertDataMessageVideoMessage struct {
+	Url           string `json:"url,omitempty"`
+	Mimetype      string `json:"mimetype,omitempty"`
+	Caption       string `json:"caption,omitempty"`
+	FileSha256    string `json:"fileSha256,omitempty"`
+	FileLength    string `json:"fileLength,omitempty"`
+	Seconds       uint32 `json:"seconds,omitempty"`
+	MediaKey      string `json:"mediaKey,omitempty"`
+	FileEncSha256 string `json:"fileEncSha256,omitempty"`
+	JPEGThumbnail string `json:"jpegThumbnail,omitempty"`
+	GIFPlayback   bool   `json:"gifPlayback,omitempty"`
 }
 
 type MessageUpsertDataMessageDocumentMessage struct {
