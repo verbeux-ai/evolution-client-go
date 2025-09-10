@@ -19,6 +19,7 @@ type CreateInstanceRequest struct {
 	GroupsIgnore                    bool                           `json:"groupsIgnore,omitempty"`
 	AlwaysOnline                    bool                           `json:"alwaysOnline,omitempty"`
 	ReadMessages                    bool                           `json:"readMessages,omitempty"`
+	SyncRecentHistory               bool                           `json:"syncRecentHistory,omitempty"`
 	ReadStatus                      bool                           `json:"readStatus,omitempty"`
 	SyncFullHistory                 bool                           `json:"syncFullHistory,omitempty"`
 	ProxyHost                       string                         `json:"proxyHost,omitempty"`
