@@ -97,9 +97,10 @@ type MessageUpsertData struct {
 
 type MessageUpsertDataKey struct {
 	RemoteJid   string `json:"remoteJid"`
+	RemoteLid   string `json:"remoteLid"`
 	FromMe      bool   `json:"fromMe"`
 	Id          string `json:"id"`
-	Participant string `json:"participant"` // Use this field do check if is a group
+	Participant string `json:"participant"`
 }
 
 type MessageUpsertDataMessage struct {
@@ -108,6 +109,7 @@ type MessageUpsertDataMessage struct {
 	MediaURL             string                                     `json:"mediaUrl"`
 	ImageMessage         MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
 	DocumentMessage      MessageUpsertDataMessageDocumentMessage    `json:"documentMessage"`
+	VideoMessage        MessageUpsertDataMessageVideoMessage       `json:"videoMessage"`
 	AudioMessage         MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
 	ReactionMessage      ReactionMessage                            `json:"reactionMessage"`
 	MessageContextInfo   MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
@@ -173,6 +175,19 @@ type MessageUpsertDataMessageListQuotedSectionRow struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	RowId       string `json:"rowId"`
+}
+
+type MessageUpsertDataMessageVideoMessage struct {
+	Url           string `json:"url,omitempty"`
+	Mimetype      string `json:"mimetype,omitempty"`
+	Caption       string `json:"caption,omitempty"`
+	FileSha256    string `json:"fileSha256,omitempty"`
+	FileLength    string `json:"fileLength,omitempty"`
+	Seconds       uint32 `json:"seconds,omitempty"`
+	MediaKey      string `json:"mediaKey,omitempty"`
+	FileEncSha256 string `json:"fileEncSha256,omitempty"`
+	JPEGThumbnail string `json:"jpegThumbnail,omitempty"`
+	GIFPlayback   bool   `json:"gifPlayback,omitempty"`
 }
 
 type MessageUpsertDataMessageDocumentMessage struct {
@@ -305,6 +320,7 @@ type MessageUpdateData struct {
 	MessageId   string                  `json:"messageId"`
 	KeyId       string                  `json:"keyId"`
 	RemoteJid   string                  `json:"remoteJid"`
+	RemoteLid   string                  `json:"remoteLid"`
 	FromMe      bool                    `json:"fromMe"`
 	Participant string                  `json:"participant"`
 	Status      MessageUpdateDataStatus `json:"status"`
@@ -313,6 +329,7 @@ type MessageUpdateData struct {
 
 type Contact struct {
 	RemoteJid     string `json:"remoteJid"`
+	RemoteLid     string `json:"remoteLid"`
 	PushName      string `json:"pushName"`
 	ProfilePicUrl string `json:"profilePicUrl"`
 	InstanceId    string `json:"instanceId"`
