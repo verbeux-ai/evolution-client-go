@@ -79,6 +79,7 @@ if err := whatsappListener.ReadBodyAsync(ctx.Request().Body); err != nil {
 | Add Chat Tag              | Sim          |
 | Find Messages             | Sim          |
 | Unread Messages           | Sim          |
+| Send Reaction Message     | Sim          |
 | Exists                    | Sim          |
 
 > Você está convidado a contribuir ao repositório!

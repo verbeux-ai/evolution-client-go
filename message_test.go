@@ -54,3 +54,17 @@ func TestSendListMessage(t *testing.T) {
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }
+
+func TestSendReactionMessage(t *testing.T) {
+	ctx := context.Background()
+	result, err := client.SendReactionMessage(ctx, os.Getenv("INSTANCE_NAME"), &evolution.ReactionMessageRequest{
+		Reaction: "🚀",
+		Key: evolution.MessageResponseKey{
+			RemoteJid: "<your_number>@s.whatsapp.net",
+			FromMe:    true,
+			Id:        "<message_id>",
+		},
+	})
+	require.NoError(t, err)
+	require.NotEmpty(t, result)
+}

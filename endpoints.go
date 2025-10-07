@@ -16,10 +16,11 @@ const (
 	sendPresenceEndpoint = "chat/sendPresence/%s"      // POST
 	existsEndpoint       = "chat/whatsappNumbers/%s"   // POST
 
-	sendMessageTextEndpoint  = "message/sendText/%s"          // POST
-	sendMessageMediaEndpoint = "message/sendMedia/%s"         // POST
-	sendMessageAudioEndpoint = "message/sendWhatsAppAudio/%s" // POST
-	sendMessageListEndpoint  = "message/sendList/%s"          // POST
+	sendMessageTextEndpoint     = "message/sendText/%s"          // POST
+	sendMessageMediaEndpoint    = "message/sendMedia/%s"         // POST
+	sendMessageAudioEndpoint    = "message/sendWhatsAppAudio/%s" // POST
+	sendMessageListEndpoint     = "message/sendList/%s"          // POST
+	sendMessageReactionEndpoint = "message/sendReaction/%s"      // POST
 
 	findLabelsEndpoint  = "label/findLabels/%s"  //GET
 	handleLabelEndpoint = "label/handleLabel/%s" // POST

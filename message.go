@@ -322,3 +322,50 @@ func (s *Client) SendListMessage(ctx context.Context, instanceName string, req *
 
 	return &toReturn, nil
 }
+
+type ReactionMessageRequest struct {
+	Reaction string             `json:"reaction,omitempty"`
+	Key      MessageResponseKey `json:"key"`
+}
+
+type ReactionMessageResponse struct {
+	ContextInfo      MessageContextInfo     `json:"contextInfo"`
+	InstanceId       string                 `json:"instanceId"`
+	Key              MessageResponseKey     `json:"key"`
+	Message          ReactionMessageRequest `json:"message"`
+	MessageTimestamp int                    `json:"messageTimestamp"`
+	MessageType      string                 `json:"messageType"`
+	PushName         string                 `json:"pushName"`
+	Source           string                 `json:"source"`
+	Status           string                 `json:"status"`
+}
+
+func (s *Client) SendReactionMessage(ctx context.Context, instanceName string, req *ReactionMessageRequest) (*ReactionMessageResponse, error) {
+	url := fmt.Sprintf(sendMessageReactionEndpoint, instanceName)
+	if req == nil {
+		return nil, fmt.Errorf("missing request object")
+	}
+
+	resp, err := s.request(ctx, req, http.MethodPost, url)
+	if err != nil {
+		return nil, err
+	}
+
+	defer resp.Body.Close()
+	if resp.StatusCode > 399 {
+		body, err := io.ReadAll(resp.Body)
+		if err != nil {
+			return nil, err
+		}
+
+		bodyErr := errors.New(string(body))
+		return nil, fmt.Errorf("failed to send reaction message with code %d: %w", resp.StatusCode, bodyErr)
+	}
+
+	var toReturn ReactionMessageResponse
+	if err = json.NewDecoder(resp.Body).Decode(&toReturn); err != nil {
+		return nil, err
+	}
+
+	return &toReturn, nil
+}
