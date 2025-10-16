@@ -211,6 +211,7 @@ type AudioMessageResponse struct {
 	PushName         string                      `json:"pushName"`
 	Source           string                      `json:"source"`
 	Status           string                      `json:"status"`
+	Transcription    string                      `json:"transcription"`
 }
 
 func (s *Client) SendAudioMessage(ctx context.Context, instanceName string, req *AudioMessageRequest) (*AudioMessageResponse, error) {
