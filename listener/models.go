@@ -109,7 +109,7 @@ type MessageUpsertDataMessage struct {
 	MediaURL             string                                     `json:"mediaUrl"`
 	ImageMessage         MessageUpsertDataMessageImageMessage       `json:"imageMessage"`
 	DocumentMessage      MessageUpsertDataMessageDocumentMessage    `json:"documentMessage"`
-	VideoMessage        MessageUpsertDataMessageVideoMessage       `json:"videoMessage"`
+	VideoMessage         MessageUpsertDataMessageVideoMessage       `json:"videoMessage"`
 	AudioMessage         MessageUpsertDataMessageAudioMessage       `json:"audioMessage"`
 	ReactionMessage      ReactionMessage                            `json:"reactionMessage"`
 	MessageContextInfo   MessageUpsertDataMessageMessageContextInfo `json:"messageContextInfo"`
@@ -317,14 +317,15 @@ const (
 )
 
 type MessageUpdateData struct {
-	MessageId   string                  `json:"messageId"`
-	KeyId       string                  `json:"keyId"`
-	RemoteJid   string                  `json:"remoteJid"`
-	RemoteLid   string                  `json:"remoteLid"`
-	FromMe      bool                    `json:"fromMe"`
-	Participant string                  `json:"participant"`
-	Status      MessageUpdateDataStatus `json:"status"`
-	InstanceId  string                  `json:"instanceId"`
+	MessageId     string                  `json:"messageId"`
+	KeyId         string                  `json:"keyId"`
+	RemoteJid     string                  `json:"remoteJid"`
+	RemoteLid     string                  `json:"remoteLid"`
+	FromMe        bool                    `json:"fromMe"`
+	Participant   string                  `json:"participant"`
+	Status        MessageUpdateDataStatus `json:"status"`
+	InstanceId    string                  `json:"instanceId"`
+	Transcription string                  `json:"transcription"`
 }
 
 type Contact struct {
