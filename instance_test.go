@@ -106,7 +106,7 @@ func TestDeleteInstance(t *testing.T) {
 
 func TestConnectInstance(t *testing.T) {
 	ctx := context.Background()
-	result, err := client.ConnectInstance(ctx, os.Getenv("INSTANCE_NAME"))
+	result, err := client.ConnectInstance(ctx, os.Getenv("INSTANCE_NAME"), "")
 	require.NoError(t, err)
 	require.NotEmpty(t, result)
 }

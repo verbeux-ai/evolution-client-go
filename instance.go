@@ -109,7 +109,7 @@ type CreateInstanceSettingsResponse struct {
 }
 
 type CreateInstanceQrCodeResponse struct {
-	PairingCode any    `json:"pairingCode,omitempty"`
+	PairingCode string `json:"pairingCode,omitempty"`
 	Code        string `json:"code,omitempty"`
 	Base64      string `json:"base64,omitempty"`
 	Count       int    `json:"count,omitempty"`
@@ -240,14 +240,17 @@ func (s *Client) DeleteInstance(ctx context.Context, instanceName string) (*Dele
 }
 
 type GetInstanceConnectResponse struct {
-	PairingCode any    `json:"pairingCode,omitempty"`
+	PairingCode string `json:"pairingCode,omitempty"`
 	Code        string `json:"code,omitempty"`
 	Base64      string `json:"base64,omitempty"`
 	Count       int    `json:"count,omitempty"`
 }
 
-func (s *Client) ConnectInstance(ctx context.Context, instanceName string) (*GetInstanceConnectResponse, error) {
+func (s *Client) ConnectInstance(ctx context.Context, instanceName, number string) (*GetInstanceConnectResponse, error) {
 	url := fmt.Sprintf(getConnectInstanceEndpoint, instanceName)
+	if number != "" {
+		url += "?number=" + number
+	}
 
 	resp, err := s.request(ctx, nil, http.MethodGet, url)
 	if err != nil {
